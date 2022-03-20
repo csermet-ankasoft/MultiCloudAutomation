@@ -261,7 +261,7 @@ style='font-family:"Segoe UI",sans-serif'><o:p>&nbsp;</o:p></span></b></p>
   0cm;mso-para-margin-bottom:.4gd;mso-para-margin-left:0cm;text-align:center;
   line-height:normal'><span style='mso-bookmark:_Hlk306718728'><span
   style='mso-no-proof:yes'><![if !vml]><img width=482 height=303
-  src="180290014CanerSermet_BitirmeOneri_files/image002.jpg"
+  src="https://cloudtalktime.com/wp-content/uploads/2021/09/92-mult-cloud.png"
   alt="Flexera: 92% of enterprises have a multicloud strategy | VentureBeat"
   v:shapes="Picture_x0020_5"><![endif]></span></span><span style='mso-bookmark:
   _Hlk306718728'><span style='font-size:10.0pt;mso-bidi-font-family:Calibri;
