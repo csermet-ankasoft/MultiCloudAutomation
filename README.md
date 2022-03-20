@@ -260,7 +260,7 @@ style='font-family:"Segoe UI",sans-serif'><o:p>&nbsp;</o:p></span></b></p>
   margin-bottom:4.8pt;margin-left:0cm;mso-para-margin-top:.4gd;mso-para-margin-right:
   0cm;mso-para-margin-bottom:.4gd;mso-para-margin-left:0cm;text-align:center;
   line-height:normal'><span style='mso-bookmark:_Hlk306718728'><span
-  style='mso-no-proof:yes'><![if !vml]><img width=482 height=303
+  style='mso-no-proof:yes'><![if !vml]><img width=1482 height=1303
   src="https://cloudtalktime.com/wp-content/uploads/2021/09/92-mult-cloud.png"
   alt="Flexera: 92% of enterprises have a multicloud strategy | VentureBeat"
   v:shapes="Picture_x0020_5"><![endif]></span></span><span style='mso-bookmark:
@@ -408,7 +408,7 @@ style='font-family:"Segoe UI",sans-serif'><o:p>&nbsp;</o:p></span></b></p>
   line-height:normal'><span style='mso-bookmark:_Hlk306718728'><span
   style='font-size:10.0pt;mso-bidi-font-family:Calibri;mso-bidi-theme-font:
   minor-latin'><span style='mso-tab-count:3'>                                                </span><span
-  style='mso-no-proof:yes'><![if !vml]><img width=394 height=229
+  style='mso-no-proof:yes'><![if !vml]><img width=1394 height=1229
   src="https://i.ibb.co/L1HVj9L/image003.jpg" v:shapes="Picture_x0020_2"><![endif]></span><o:p></o:p></span></span></p>
   <p class=MsoNormal align=center style='margin-top:4.8pt;margin-right:0cm;
   margin-bottom:4.8pt;margin-left:0cm;mso-para-margin-top:.4gd;mso-para-margin-right:
@@ -611,49 +611,9 @@ style='font-family:"Segoe UI",sans-serif'><o:p>&nbsp;</o:p></span></b></p>
     <td width=246 valign=top style='width:184.55pt;border:solid windowtext 1.0pt;
     mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;
     height:27.9pt'>
-    <p class=MsoNormal><!--[if gte vml 1]><v:line id="Straight_x0020_Connector_x0020_3"
-     o:spid="_x0000_s1026" style='position:absolute;z-index:251659264;
-     visibility:visible;mso-wrap-style:square;mso-width-percent:0;
-     mso-height-percent:0;mso-wrap-distance-left:9pt;mso-wrap-distance-top:0;
-     mso-wrap-distance-right:9pt;mso-wrap-distance-bottom:0;
-     mso-position-horizontal:absolute;mso-position-horizontal-relative:text;
-     mso-position-vertical:absolute;mso-position-vertical-relative:text;
-     mso-width-percent:0;mso-height-percent:0;mso-width-relative:margin;
-     mso-height-relative:margin' from="-5.35pt,.95pt" to="177.75pt,36.75pt"
-     o:gfxdata="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
-8wAAAAQFAAAAAA==
-" strokecolor="black [3200]" strokeweight=".5pt">
-     <v:stroke joinstyle="miter"/>
-    </v:line><![endif]--><![if !vml]><span style='mso-ignore:vglayout;
+    <p class=MsoNormal><![if !vml]><span style='mso-ignore:vglayout;
     position:absolute;z-index:251659264;margin-left:-8px;margin-top:0px;
-    width:246px;height:50px'><img width=246 height=50
-    src="180290014CanerSermet_BitirmeOneri_files/image005.png" v:shapes="Straight_x0020_Connector_x0020_3"></span><![endif]><span
+    width:246px;height:50px'></span><![endif]><span
     style='mso-bookmark:_Hlk306718728'></span><span style='mso-bookmark:_Hlk306718728'><span
     style='font-size:10.0pt;line-height:115%'><span
     style='mso-spacerun:yes'>                    </span><span style='mso-tab-count:
