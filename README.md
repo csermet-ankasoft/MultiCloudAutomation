@@ -413,7 +413,7 @@ style='font-family:"Segoe UI",sans-serif'><o:p>&nbsp;</o:p></span></b></p>
    visibility:visible;mso-wrap-style:square' o:bordertopcolor="yellow pure"
    o:borderleftcolor="yellow pure" o:borderbottomcolor="yellow pure"
    o:borderrightcolor="yellow pure">
-   <v:imagedata src="180290014CanerSermet_BitirmeOneri_files/image003.jpg"
+   <v:imagedata src="https://ibb.co/1TjFyRD"
     o:title=""/>
    <w:bordertop type="single" width="6"/>
    <w:borderleft type="single" width="6"/>
