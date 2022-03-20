@@ -104,8 +104,8 @@ line-height:normal'><b><span style='font-family:"Segoe UI",sans-serif'>&nbsp;</s
 
 <div align=center>
 
-<table class=MsoNormalTable border=1 cellspacing=0 cellpadding=0 width=680
- style='width:510.35pt;border-collapse:collapse;border:none'>
+<table class=MsoNormalTable border=1 cellspacing=0 cellpadding=0 width=1680
+ style='width:1510.35pt;border-collapse:collapse;border:none'>
  <tr style='height:5.65pt'>
   <td width=160 style='width:120.25pt;border:solid windowtext 1.0pt;padding:
   0cm 5.4pt 0cm 5.4pt;height:5.65pt'>
