@@ -408,19 +408,8 @@ style='font-family:"Segoe UI",sans-serif'><o:p>&nbsp;</o:p></span></b></p>
   line-height:normal'><span style='mso-bookmark:_Hlk306718728'><span
   style='font-size:10.0pt;mso-bidi-font-family:Calibri;mso-bidi-theme-font:
   minor-latin'><span style='mso-tab-count:3'>                                                </span><span
-  style='mso-no-proof:yes'><!--[if gte vml 1]><v:shape id="Picture_x0020_2"
-   o:spid="_x0000_i1025" type="#_x0000_t75" style='width:294pt;height:170.25pt;
-   visibility:visible;mso-wrap-style:square' o:bordertopcolor="yellow pure"
-   o:borderleftcolor="yellow pure" o:borderbottomcolor="yellow pure"
-   o:borderrightcolor="yellow pure">
-   <v:imagedata src="https://ibb.co/1TjFyRD"
-    o:title=""/>
-   <w:bordertop type="single" width="6"/>
-   <w:borderleft type="single" width="6"/>
-   <w:borderbottom type="single" width="6"/>
-   <w:borderright type="single" width="6"/>
-  </v:shape><![endif]--><![if !vml]><img width=394 height=229
-  src="180290014CanerSermet_BitirmeOneri_files/image004.jpg" v:shapes="Picture_x0020_2"><![endif]></span><o:p></o:p></span></span></p>
+  style='mso-no-proof:yes'><![if !vml]><img width=394 height=229
+  src="https://ibb.co/1TjFyRD" v:shapes="Picture_x0020_2"><![endif]></span><o:p></o:p></span></span></p>
   <p class=MsoNormal align=center style='margin-top:4.8pt;margin-right:0cm;
   margin-bottom:4.8pt;margin-left:0cm;mso-para-margin-top:.4gd;mso-para-margin-right:
   0cm;mso-para-margin-bottom:.4gd;mso-para-margin-left:0cm;text-align:center;
