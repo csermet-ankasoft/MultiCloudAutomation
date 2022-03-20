@@ -409,7 +409,7 @@ style='font-family:"Segoe UI",sans-serif'><o:p>&nbsp;</o:p></span></b></p>
   style='font-size:10.0pt;mso-bidi-font-family:Calibri;mso-bidi-theme-font:
   minor-latin'><span style='mso-tab-count:3'>                                                </span><span
   style='mso-no-proof:yes'><![if !vml]><img width=394 height=229
-  src="https://ibb.co/1TjFyRD" v:shapes="Picture_x0020_2"><![endif]></span><o:p></o:p></span></span></p>
+  src="https://i.ibb.co/L1HVj9L/image003.jpg" v:shapes="Picture_x0020_2"><![endif]></span><o:p></o:p></span></span></p>
   <p class=MsoNormal align=center style='margin-top:4.8pt;margin-right:0cm;
   margin-bottom:4.8pt;margin-left:0cm;mso-para-margin-top:.4gd;mso-para-margin-right:
   0cm;mso-para-margin-bottom:.4gd;mso-para-margin-left:0cm;text-align:center;
