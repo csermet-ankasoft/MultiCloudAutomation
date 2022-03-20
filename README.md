@@ -408,11 +408,8 @@ style='font-family:"Segoe UI",sans-serif'><o:p>&nbsp;</o:p></span></b></p>
   line-height:normal'><span style='mso-bookmark:_Hlk306718728'><span
   style='font-size:10.0pt;mso-bidi-font-family:Calibri;mso-bidi-theme-font:
   minor-latin'><span style='mso-tab-count:3'></span><span
-  style='mso-no-proof:yes'><![if !vml]>
-   <div class="img-container" style="text-align: center;"> <!-- Block parent element -->
-      <img width=790 height=460 src="https://i.ibb.co/L1HVj9L/image003.jpg" v:shapes="Picture_x0020_2">>
-    </div>
-   
+  style='mso-no-proof:yes'><![if !vml]>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   <img width=790 height=460 src="https://i.ibb.co/L1HVj9L/image003.jpg" v:shapes="Picture_x0020_2">  
    </p><![endif]></span><o:p></o:p></span></span>
   <p class=MsoNormal align=center style='margin-top:4.8pt;margin-right:0cm;
   margin-bottom:4.8pt;margin-left:0cm;mso-para-margin-top:.4gd;mso-para-margin-right:
