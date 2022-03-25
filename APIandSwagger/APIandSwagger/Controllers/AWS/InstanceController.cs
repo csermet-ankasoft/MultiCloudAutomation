@@ -7,11 +7,11 @@ using Amazon.EC2.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace APIandSwagger.Controllers
+namespace APIandSwagger.Controllers.AWS
 {
-    [Route("aws/instance/[controller]")]
+    [Route("aws/[controller]")]
     [ApiController]
-    public class AWSInstanceController : ControllerBase
+    public class InstanceController : ControllerBase
     {
 
         private static async Task<List<string>> LaunchInstances(IAmazonEC2 ec2Client, RunInstancesRequest requestLaunch)
@@ -28,51 +28,42 @@ namespace APIandSwagger.Controllers
 
             return instanceIds;
         }
-        /*
-        public static async void getAllInstance(AmazonEC2Client ec2)
-        {
-            DescribeInstancesRequest req = new DescribeInstancesRequest();
-            List<Amazon.EC2.Model.Reservation> result = ec2.DescribeInstancesAsync(req);
 
-            foreach (Amazon.EC2.Model.Reservation reservation in result)
-            {
-                foreach (var runningInstance in reservation.Instances)
-                {
-                    //MessageBox.Show(runningInstance.InstanceId + runningInstance.InstanceType);
-                }
-            }
-        }
-        */
 
-        // GET: api/AWSInstance
+
+
+
+        // GET: api/Instance
         [HttpGet]
         public string Get()
         {
-            
-            AmazonEC2Client ec2 = new AmazonEC2Client();
-            //getAllInstance(ec2);
-            RunInstancesRequest req = new RunInstancesRequest("ami-0c02fb55956c7d316", 1, 1);
-
-            InstanceType t2 = new InstanceType("t2.micro");
-            req.InstanceType = t2;
-            return LaunchInstances(ec2, req).Result[0];
-            
+            return "hi";
         }
 
-        // GET: api/AWSInstance/5
+        // GET: api/Instance/5
         [HttpGet("{id}", Name = "Get")]
         public string Get(int id)
         {
             return "value";
         }
 
-        // POST: api/AWSInstance
+        // POST: api/Instance
         [HttpPost]
-        public void Post([FromBody] string value)
+        public string Post([FromBody] Data.InstanceData value)
         {
+            var awskey = new Amazon.Runtime.BasicAWSCredentials("AKIARLTYWTQ2SUQSPH5P", "JSAoZRYXwulUh8IOhuFMkzKDXWH2fCaV911o1/F4");
+            AmazonEC2Client ec2 = new AmazonEC2Client();
+            //getAllInstance(ec2);
+            RunInstancesRequest req = new RunInstancesRequest("ami-0c02fb55956c7d316", 1, 1);
+
+            InstanceType t2 = new InstanceType(value.instanceType);
+            Console.Write(value.ToString());
+            Console.Write(value.instanceType.ToString());
+            req.InstanceType = t2;
+            return LaunchInstances(ec2, req).Result[0];
         }
 
-        // PUT: api/AWSInstance/5
+        // PUT: api/Instance/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {

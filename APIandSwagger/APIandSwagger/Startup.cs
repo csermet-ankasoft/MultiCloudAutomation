@@ -53,7 +53,7 @@ namespace APIandSwagger
             app.UseMvc();
             app.UseSwagger();
             app.UseSwaggerUI(options => {
-                options.SwaggerEndpoint("/swagger/v1/swagger.json", "SwaggerTest");
+                options.SwaggerEndpoint("/swagger/v1/swagger.json", "SwaggerTest2");
             });
         }
     }

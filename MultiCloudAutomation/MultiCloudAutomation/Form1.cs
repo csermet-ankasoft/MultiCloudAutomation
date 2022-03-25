@@ -147,15 +147,15 @@ namespace MultiCloudAutomation
 
         private async void button3_Click(object sender, EventArgs e)
         {
-            //var awskey = new Amazon.Runtime.BasicAWSCredentials("AKIARLTYWTQ2SUQSPH5P", "JSAoZRYXwulUh8IOhuFMkzKDXWH2fCaV911o1/F4");
-            AmazonEC2Client ec2 = new AmazonEC2Client();
+            var awskey = new Amazon.Runtime.BasicAWSCredentials("test", "test");
+            AmazonEC2Client ec2 = new AmazonEC2Client(awskey);
+            //ec2.auth
             getAllInstance(ec2);            
             RunInstancesRequest req = new RunInstancesRequest("ami-0c02fb55956c7d316", 1,1);
 
             InstanceType t2  = new InstanceType("t2.micro");
             req.InstanceType = t2;
             await LaunchInstances(ec2, req);
-
 
             /*
             RegionDisksResource.ListRequest request = computeService.RegionDisks.List(project, region);
