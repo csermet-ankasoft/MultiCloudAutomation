@@ -17,6 +17,7 @@ using Google.Apis.Services;
 using Google.Apis.Compute.v1;
 using Amazon.EC2;
 using Amazon.EC2.Model;
+using Amazon;
 
 namespace MultiCloudAutomation
 {
@@ -49,7 +50,13 @@ namespace MultiCloudAutomation
 
         private async void button2_Click(object sender, EventArgs e)
         {
-            OAUTH();
+            //OAUTH();
+            foreach (var item in RegionEndpoint.EnumerableAllRegions)
+            {
+                listBox1.Items.Add(item);
+            }
+            
+            
         }
 
         internal class Token
@@ -147,8 +154,9 @@ namespace MultiCloudAutomation
 
         private async void button3_Click(object sender, EventArgs e)
         {
-            var awskey = new Amazon.Runtime.BasicAWSCredentials("test", "test");
-            AmazonEC2Client ec2 = new AmazonEC2Client(awskey);
+            var awskey = new Amazon.Runtime.BasicAWSCredentials("", "");
+            RegionEndpoint t = RegionEndpoint.USEast1;
+            AmazonEC2Client ec2 = new AmazonEC2Client(awskey,t);
             //ec2.auth
             getAllInstance(ec2);            
             RunInstancesRequest req = new RunInstancesRequest("ami-0c02fb55956c7d316", 1,1);

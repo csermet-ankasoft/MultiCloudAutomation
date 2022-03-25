@@ -10,5 +10,9 @@ namespace APIandSwagger.Data
     {
         [Required(ErrorMessage ="Instance Type required")]
         public string instanceType { get; set; }
+        [Required(ErrorMessage = "Region required")]
+        public string region { get; set; }
+        [Required(ErrorMessage = "Image ID required")]
+        public string imageID { get; set; }
     }
 }
