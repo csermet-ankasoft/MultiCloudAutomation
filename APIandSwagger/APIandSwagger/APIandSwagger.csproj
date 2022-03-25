@@ -9,8 +9,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AWSSDK.Core" Version="3.7.9.2" />
+    <PackageReference Include="AWSSDK.EC2" Version="3.7.61.4" />
+    <PackageReference Include="AWSSDK.S3" Version="3.7.8.12" />
+    <PackageReference Include="AWSSDK.SQS" Version="3.7.2.37" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.9" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.3.0" />
   </ItemGroup>
 
 </Project>

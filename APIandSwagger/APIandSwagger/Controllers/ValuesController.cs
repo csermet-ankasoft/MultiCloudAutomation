@@ -2,14 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Amazon.EC2;
+using Amazon.EC2.Model;
 using Microsoft.AspNetCore.Mvc;
 
 namespace APIandSwagger.Controllers
-{
-    [Route("api/[controller]")]
+{    
+
+    [Route("api/aws/[controller]")]
     [ApiController]
     public class ValuesController : ControllerBase
-    {
+    {        
         // GET api/values
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
