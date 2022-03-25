@@ -33,8 +33,8 @@ MÜHEND&#304;SL&#304;&#286;&#304; BÖLÜMÜ<o:p></o:p></span></b></p>
 
 <p class=MsoNormal align=center style='margin-bottom:0cm;text-align:center;
 line-height:normal'><b><span style='font-size:12.0pt;mso-bidi-font-family:Calibri;
-mso-bidi-theme-font:minor-latin'>B&#304;T&#304;RME ÖDEV&#304; PROJE
-ÖNER&#304;S&#304;</span></b><b style='mso-bidi-font-weight:normal'><span
+mso-bidi-theme-font:minor-latin'>B&#304;T&#304;RME ÖDEV&#304; PROJESI
+</span></b><b style='mso-bidi-font-weight:normal'><span
 style='font-size:12.0pt;mso-bidi-font-family:Calibri;mso-bidi-theme-font:minor-latin'><o:p></o:p></span></b></p>
 
 <p class=MsoNormal align=center style='margin-bottom:0cm;text-align:center;
