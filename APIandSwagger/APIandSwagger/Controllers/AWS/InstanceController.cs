@@ -51,7 +51,6 @@ namespace APIandSwagger.Controllers.AWS
         [HttpPost]
         public string Post([FromBody] Data.InstanceData value)
         {
-            var awskey = new Amazon.Runtime.BasicAWSCredentials("AKIARLTYWTQ2SUQSPH5P", "JSAoZRYXwulUh8IOhuFMkzKDXWH2fCaV911o1/F4");
             AmazonEC2Client ec2 = new AmazonEC2Client();
             //getAllInstance(ec2);
             RunInstancesRequest req = new RunInstancesRequest("ami-0c02fb55956c7d316", 1, 1);
