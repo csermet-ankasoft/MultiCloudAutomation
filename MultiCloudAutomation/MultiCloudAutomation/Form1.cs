@@ -154,7 +154,7 @@ namespace MultiCloudAutomation
 
         private async void button3_Click(object sender, EventArgs e)
         {
-            var awskey = new Amazon.Runtime.BasicAWSCredentials("", "");
+            var awskey = new Amazon.Runtime.BasicAWSCredentials("", "/");
             RegionEndpoint t = RegionEndpoint.USEast1;
             AmazonEC2Client ec2 = new AmazonEC2Client(awskey,t);
             //ec2.auth

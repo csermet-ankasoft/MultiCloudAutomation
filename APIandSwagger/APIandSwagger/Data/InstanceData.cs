@@ -14,5 +14,7 @@ namespace APIandSwagger.Data
         public string region { get; set; }
         [Required(ErrorMessage = "Image ID required")]
         public string imageID { get; set; }
+        public int minCount = 1;
+        public int maxCount = 1;
     }
 }
