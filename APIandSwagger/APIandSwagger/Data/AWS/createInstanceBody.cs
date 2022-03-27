@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations;
 
-namespace APIandSwagger.Data
+namespace APIandSwagger
 {
-    public class InstanceData
+    public class createInstanceBody
     {
-        [Required(ErrorMessage ="Instance Type required")]
+        [Required(ErrorMessage = "Instance Type required")]
         public string instanceType { get; set; }
         [Required(ErrorMessage = "Region required")]
         public string region { get; set; }

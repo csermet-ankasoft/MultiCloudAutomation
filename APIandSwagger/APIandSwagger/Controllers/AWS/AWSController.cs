@@ -14,10 +14,10 @@ namespace APIandSwagger.Controllers.AWS
     {
         // POST: api/AWS
         [HttpPost]
-        public void setCredential([FromBody] Data.AWSKeyBody value)
+        public void setCredential([FromBody] AWSKeyBody value)
         {
-            Class.AWSKey.accessKey = value.accessKey;
-            Class.AWSKey.secretKey = value.secretKey;
+            AWSKey.accessKey = value.accessKey;
+            AWSKey.secretKey = value.secretKey;
         }
 
         [HttpGet]

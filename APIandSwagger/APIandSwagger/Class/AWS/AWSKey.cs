@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace APIandSwagger.Class
+namespace APIandSwagger
 {
     public class AWSKey
     {

@@ -10,42 +10,30 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace APIandSwagger.Controllers.AWS
 {
-    [Route("aws/[controller]")]
+    //aws/instance/[function]
+    [Route("aws/[controller]/[action]")]
     [ApiController]
     public class InstanceController : ControllerBase
     {
-
-        // GET: api/Instance
+        //aws/instance/getAllInstance
         [HttpGet]
-        public string Get()
+        public List<Reservation> getAllInstance([FromBody] getAllInstanceBody body)
         {
-            return "hi";
+            return Class.AWSInstance.getAllInstance(body).Result.Reservations;
         }
 
-        // GET: api/Instance/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        //aws/instance/getAllInstanceByFilter
+        [HttpGet]
+        public List<Reservation> getAllInstanceByFilter([FromBody] getAllInstanceByFilterBody body)
         {
-            return "value";
+            return Class.AWSInstance.getAllInstanceByFilter(body).Result.Reservations;
         }
 
-        // POST: api/Instance
-        [HttpPost]
-        public List<string> Post([FromBody] Data.InstanceData instancedata)
+        //aws/instance/createInstance
+        [HttpGet]
+        public List<string> createInstance([FromBody] createInstanceBody body)
         {
-            return Class.AWSInstance.CreateInstance(instancedata).Result;
-        }
-
-        // PUT: api/Instance/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            return Class.AWSInstance.CreateInstance(body).Result;
         }
     }
 }
