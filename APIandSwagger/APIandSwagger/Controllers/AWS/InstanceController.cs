@@ -16,21 +16,21 @@ namespace APIandSwagger.Controllers.AWS
     public class InstanceController : ControllerBase
     {
         //aws/instance/getAllInstance
-        [HttpGet]
+        [HttpPost]
         public List<Reservation> getAllInstance([FromBody] getAllInstanceBody body)
         {
             return Class.AWSInstance.getAllInstance(body).Result.Reservations;
         }
 
         //aws/instance/getAllInstanceByFilter
-        [HttpGet]
+        [HttpPost]
         public List<Reservation> getAllInstanceByFilter([FromBody] getAllInstanceByFilterBody body)
         {
             return Class.AWSInstance.getAllInstanceByFilter(body).Result.Reservations;
         }
 
         //aws/instance/createInstance
-        [HttpGet]
+        [HttpPost]
         public List<string> createInstance([FromBody] createInstanceBody body)
         {
             return Class.AWSInstance.CreateInstance(body).Result;

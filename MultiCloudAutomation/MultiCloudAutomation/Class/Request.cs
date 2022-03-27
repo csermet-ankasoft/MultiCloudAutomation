@@ -1,29 +1,55 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MultiCloudAutomation.Class
+namespace MultiCloudAutomation
 {
     class Request
     {
-        public async Task<string> GetRequest(string url)
-        {
-            HttpClient client = new HttpClient();
-            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", "nope");
-            //label2.Text = "waiting";
-            //label2.ForeColor = Color.Orange;
-            using (HttpResponseMessage response = await client.GetAsync(new Uri(url)))
-            {
-                var x = await response.Content.ReadAsStringAsync();
-                //label2.Text = "Done";
-                //label2.ForeColor = Color.Green;
+        public static bool  done = true;
 
-                return x;
+        public static async Task<string> PostRequest(string url, string jsonbody)
+        {
+            done = false;
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri("https://localhost:44328/");
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            //client.DefaultRequestHeaders.Authorization = AuthenticationHeaderValue.Parse("t");
+            var httpContent = new StringContent(jsonbody, Encoding.UTF8, "application/json");
+            using (HttpResponseMessage response = await client.PostAsync(url, httpContent))
+            {
+                var responseContent = await response.Content.ReadAsStringAsync();
+                done = true;
+                return responseContent;
             }
         }
-        Task<string> test;
+        public static Task<string> PostRequestAsync(string url, string jsonbody)
+        {
+            return Task.Run(() => PostRequest(url, jsonbody));
+        }
+
+        public static async Task<string> GetRequest(string url)
+        {
+            done = false;
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri("https://localhost:44328/");
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            using (HttpResponseMessage response = await client.GetAsync(url))
+            {
+                var responseContent = await response.Content.ReadAsStringAsync();
+                done = true;
+                return responseContent;
+            }
+        }
+        public static Task<string> GetRequestAsync(string url)
+        {
+            return Task.Run(() => GetRequest(url));
+        }
+
     }
 }

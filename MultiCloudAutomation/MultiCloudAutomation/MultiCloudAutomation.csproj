@@ -77,6 +77,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class\Request.cs" />
+    <Compile Include="Data\AWS\createInstanceBody.cs" />
+    <Compile Include="Data\AWS\getAllInstanceBody.cs" />
+    <Compile Include="Data\AWS\getAllInstanceByFilterBody.cs" />
+    <Compile Include="Data\Root.cs" />
     <Compile Include="Forms\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -98,6 +102,38 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\MultiCloudAutomation.Data.Architecture.datasource" />
+    <None Include="Properties\DataSources\MultiCloudAutomation.Data.Attachment.datasource" />
+    <None Include="Properties\DataSources\MultiCloudAutomation.Data.BlockDeviceMapping.datasource" />
+    <None Include="Properties\DataSources\MultiCloudAutomation.Data.CapacityReservationPreference.datasource" />
+    <None Include="Properties\DataSources\MultiCloudAutomation.Data.CapacityReservationSpecification.datasource" />
+    <None Include="Properties\DataSources\MultiCloudAutomation.Data.CpuOptions.datasource" />
+    <None Include="Properties\DataSources\MultiCloudAutomation.Data.Ebs.datasource" />
+    <None Include="Properties\DataSources\MultiCloudAutomation.Data.EnclaveOptions.datasource" />
+    <None Include="Properties\DataSources\MultiCloudAutomation.Data.Group.datasource" />
+    <None Include="Properties\DataSources\MultiCloudAutomation.Data.HibernationOptions.datasource" />
+    <None Include="Properties\DataSources\MultiCloudAutomation.Data.HostnameType.datasource" />
+    <None Include="Properties\DataSources\MultiCloudAutomation.Data.HttpEndpoint.datasource" />
+    <None Include="Properties\DataSources\MultiCloudAutomation.Data.HttpProtocolIpv6.datasource" />
+    <None Include="Properties\DataSources\MultiCloudAutomation.Data.HttpTokens.datasource" />
+    <None Include="Properties\DataSources\MultiCloudAutomation.Data.Hypervisor.datasource" />
+    <None Include="Properties\DataSources\MultiCloudAutomation.Data.InstanceMetadataTags.datasource" />
+    <None Include="Properties\DataSources\MultiCloudAutomation.Data.InstanceType.datasource" />
+    <None Include="Properties\DataSources\MultiCloudAutomation.Data.MetadataOptions.datasource" />
+    <None Include="Properties\DataSources\MultiCloudAutomation.Data.Monitoring.datasource" />
+    <None Include="Properties\DataSources\MultiCloudAutomation.Data.Name.datasource" />
+    <None Include="Properties\DataSources\MultiCloudAutomation.Data.NetworkInterface.datasource" />
+    <None Include="Properties\DataSources\MultiCloudAutomation.Data.Placement.datasource" />
+    <None Include="Properties\DataSources\MultiCloudAutomation.Data.PrivateDnsNameOptions.datasource" />
+    <None Include="Properties\DataSources\MultiCloudAutomation.Data.PrivateIpAddress.datasource" />
+    <None Include="Properties\DataSources\MultiCloudAutomation.Data.Root.datasource" />
+    <None Include="Properties\DataSources\MultiCloudAutomation.Data.RootDeviceType.datasource" />
+    <None Include="Properties\DataSources\MultiCloudAutomation.Data.SecurityGroup.datasource" />
+    <None Include="Properties\DataSources\MultiCloudAutomation.Data.State.datasource" />
+    <None Include="Properties\DataSources\MultiCloudAutomation.Data.StateReason.datasource" />
+    <None Include="Properties\DataSources\MultiCloudAutomation.Data.Status.datasource" />
+    <None Include="Properties\DataSources\MultiCloudAutomation.Data.Tenancy.datasource" />
+    <None Include="Properties\DataSources\MultiCloudAutomation.Data.VirtualizationType.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
