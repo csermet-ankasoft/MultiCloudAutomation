@@ -28,9 +28,10 @@ namespace MultiCloudAutomation
                 return responseContent;
             }
         }
+
         public static Task<string> PostRequestAsync(string url, string jsonbody)
         {
-            return Task.Run(() => PostRequest(url, jsonbody));
+            return Task.Run(() =>  PostRequest(url, jsonbody));
         }
 
         public static async Task<string> GetRequest(string url)
@@ -46,6 +47,7 @@ namespace MultiCloudAutomation
                 return responseContent;
             }
         }
+
         public static Task<string> GetRequestAsync(string url)
         {
             return Task.Run(() => GetRequest(url));
