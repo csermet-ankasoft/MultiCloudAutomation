@@ -17,9 +17,17 @@ namespace APIandSwagger.Controllers.AWS
     {
         //aws/instance/getAllInstance
         [HttpPost]
-        public List<Reservation> getAllInstance([FromBody] getAllInstanceBody body)
+        public IActionResult getAllInstance([FromBody] getAllInstanceBody body)
         {
-            return Class.AWSInstance.getAllInstance(body).Result.Reservations;
+            try
+            {
+                return Ok(Class.AWSInstance.getAllInstance(body).Result.Reservations);
+            }
+            catch (KeyNotFoundException)
+            {
+                return BadRequest("Key Not Found");
+            }
+            
         }
 
         //aws/instance/getAllInstanceByFilter

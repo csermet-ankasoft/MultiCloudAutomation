@@ -80,6 +80,7 @@ namespace MultiCloudAutomation
         {
             List<AWS.InstanceDataGridView> instanceDataGridViewList = new List<AWS.InstanceDataGridView>();
             var getall = await getAllInstance("us-east-1");
+            MessageBox.Show(getall.ToString());
             string jsonbody = JsonConvert.SerializeObject(getall);
             JArray json_data = (JArray)JsonConvert.DeserializeObject(task);
             foreach (var item in json_data)
