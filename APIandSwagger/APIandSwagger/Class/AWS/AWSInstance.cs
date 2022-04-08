@@ -19,25 +19,15 @@ namespace APIandSwagger.Class
             }
         }
 
-
         public static Task<List<string>> CreateInstance(createInstanceBody body)
         {
-            try
-            {
-                checkAWSKey();
-                var awskey = new Amazon.Runtime.BasicAWSCredentials(AWSKey.accessKey, AWSKey.secretKey);
-                RegionEndpoint regionEndpoint = RegionEndpoint.GetBySystemName(body.region);
-                AmazonEC2Client ec2Client = new AmazonEC2Client(awskey, regionEndpoint);
-                RunInstancesRequest runInstanceRequest = new RunInstancesRequest(body.imageID, body.minCount, body.maxCount);
-                runInstanceRequest.InstanceType = body.instanceType;
-                return LaunchInstances(ec2Client, runInstanceRequest);
-            }
-            catch (KeyNotFoundException)
-            {
-                throw;
-            }
-            
-            
+            checkAWSKey();
+            var awskey = new Amazon.Runtime.BasicAWSCredentials(AWSKey.accessKey, AWSKey.secretKey);
+            RegionEndpoint regionEndpoint = RegionEndpoint.GetBySystemName(body.region);
+            AmazonEC2Client ec2Client = new AmazonEC2Client(awskey, regionEndpoint);
+            RunInstancesRequest runInstanceRequest = new RunInstancesRequest(body.imageID, body.minCount, body.maxCount);
+            runInstanceRequest.InstanceType = body.instanceType;
+            return LaunchInstances(ec2Client, runInstanceRequest);
         }
 
         private static async Task<List<string>> LaunchInstances(IAmazonEC2 ec2Client, RunInstancesRequest requestLaunch)
@@ -56,23 +46,13 @@ namespace APIandSwagger.Class
 
         public static Task<DescribeInstancesResponse> getAllInstance(getAllInstanceBody body)
         {
-
-            try
-            {
-                checkAWSKey();
-                var awsKey = new Amazon.Runtime.BasicAWSCredentials(AWSKey.accessKey, AWSKey.secretKey);
-                RegionEndpoint regionEndpoint = RegionEndpoint.GetBySystemName(body.region);
-                AmazonEC2Client ec2Client = new AmazonEC2Client(awsKey, regionEndpoint);
-                CancellationToken cancellationToken;
-                DescribeInstancesRequest describeInstancesRequest = new DescribeInstancesRequest();
-                return ec2Client.DescribeInstancesAsync(describeInstancesRequest, cancellationToken);
-            }
-            catch (KeyNotFoundException)
-            {
-
-                throw;
-            }
-            
+            checkAWSKey();
+            var awsKey = new Amazon.Runtime.BasicAWSCredentials(AWSKey.accessKey, AWSKey.secretKey);
+            RegionEndpoint regionEndpoint = RegionEndpoint.GetBySystemName(body.region);
+            AmazonEC2Client ec2Client = new AmazonEC2Client(awsKey, regionEndpoint);
+            CancellationToken cancellationToken;
+            DescribeInstancesRequest describeInstancesRequest = new DescribeInstancesRequest();
+            return ec2Client.DescribeInstancesAsync(describeInstancesRequest, cancellationToken);
         }
 
 

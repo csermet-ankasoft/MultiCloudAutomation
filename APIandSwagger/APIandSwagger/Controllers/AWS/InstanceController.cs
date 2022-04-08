@@ -25,23 +25,38 @@ namespace APIandSwagger.Controllers.AWS
             }
             catch (KeyNotFoundException)
             {
-                return BadRequest("Key Not Found");
+                return Unauthorized();
             }
             
         }
 
         //aws/instance/getAllInstanceByFilter
         [HttpPost]
-        public List<Reservation> getAllInstanceByFilter([FromBody] getAllInstanceByFilterBody body)
+        public IActionResult getAllInstanceByFilter([FromBody] getAllInstanceByFilterBody body)
         {
-            return Class.AWSInstance.getAllInstanceByFilter(body).Result.Reservations;
+            try
+            {
+                return Ok(Class.AWSInstance.getAllInstanceByFilter(body).Result.Reservations);
+            }
+            catch (KeyNotFoundException)
+            {
+                return Unauthorized();
+            }
+            
         }
 
         //aws/instance/createInstance
         [HttpPost]
-        public List<string> createInstance([FromBody] createInstanceBody body)
+        public IActionResult createInstance([FromBody] createInstanceBody body)
         {
-            return Class.AWSInstance.CreateInstance(body).Result;
+            try
+            {
+                return Created(Class.AWSInstance.CreateInstance(body).Result[0], Class.AWSInstance.CreateInstance(body).Result);
+            }
+            catch (KeyNotFoundException)
+            {
+                return Unauthorized();
+            }
         }
     }
 }

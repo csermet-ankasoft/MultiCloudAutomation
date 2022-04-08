@@ -179,6 +179,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class\Request.cs" />
+    <Compile Include="Class\ResponseClass.cs" />
     <Compile Include="Data\AWS\createInstanceBody.cs" />
     <Compile Include="Data\AWS\getAllInstanceBody.cs" />
     <Compile Include="Data\AWS\getAllInstanceByFilterBody.cs" />
