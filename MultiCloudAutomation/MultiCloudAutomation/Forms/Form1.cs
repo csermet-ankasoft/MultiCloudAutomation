@@ -34,6 +34,7 @@ namespace MultiCloudAutomation
         private void Form1_Load(object sender, EventArgs e)
         {
         }
+
         //Beginning Variables
         ResponseClass task;
         
@@ -63,14 +64,13 @@ namespace MultiCloudAutomation
         
 
         private async void button1_Click(object sender, EventArgs e)
-        {
-            List<AWS.InstanceDataGridView> instanceDataGridViewList = new List<AWS.InstanceDataGridView>();
-            ResponseClass getall = await getAllInstance("us-east-1");
-            MessageBox.Show(getall.StatusCode.ToString());
+        {            
+            ResponseClass getallinstances = await getAllInstance("us-east-1");
 
-            if (getall.StatusCode == System.Net.HttpStatusCode.OK)
+            List<AWS.InstanceDataGridView> instanceDataGridViewList = new List<AWS.InstanceDataGridView>();
+            if (getallinstances.StatusCode == System.Net.HttpStatusCode.OK)
             {
-                string jsonbody = JsonConvert.SerializeObject(getall);
+                string jsonbody = JsonConvert.SerializeObject(getallinstances);
                 JArray json_data = (JArray)JsonConvert.DeserializeObject(task.Content);
                 foreach (var item in json_data)
                 {
@@ -88,11 +88,10 @@ namespace MultiCloudAutomation
                 }
                 dataGridView1.DataSource = instanceDataGridViewList;
             }
-            else if (getall.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+            else if (getallinstances.StatusCode == System.Net.HttpStatusCode.Unauthorized)
             {
                 MessageBox.Show("Unauthorized Please First Login");
-            }
-            
+            }            
         }
     }
 }
