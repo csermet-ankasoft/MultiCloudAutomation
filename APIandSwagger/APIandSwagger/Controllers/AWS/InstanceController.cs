@@ -51,12 +51,30 @@ namespace APIandSwagger.Controllers.AWS
         {
             try
             {
-                return Created(Class.AWSInstance.CreateInstance(body).Result[0], Class.AWSInstance.CreateInstance(body).Result);
+                var result = Class.AWSInstance.CreateInstance(body).Result;
+                return Created(result[0],result);
             }
             catch (KeyNotFoundException)
             {
                 return Unauthorized();
             }
         }
+
+        /*
+        [HttpPost]
+        public IActionResult getAllImage([FromBody] getAllInstanceBody body)
+        {
+            try
+            {
+                return Ok(Class.AWSInstance.getAllImage(body).Result);
+            }
+            catch (KeyNotFoundException)
+            {
+                return Unauthorized();
+            }
+
+        }
+        */
+
     }
 }

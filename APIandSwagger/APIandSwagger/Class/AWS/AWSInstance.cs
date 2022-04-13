@@ -27,6 +27,19 @@ namespace APIandSwagger.Class
             AmazonEC2Client ec2Client = new AmazonEC2Client(awskey, regionEndpoint);
             RunInstancesRequest runInstanceRequest = new RunInstancesRequest(body.imageID, body.minCount, body.maxCount);
             runInstanceRequest.InstanceType = body.instanceType;
+            if (body.tagDictionary != null)
+            {
+                TagSpecification tagSpecification = new TagSpecification();
+                tagSpecification.ResourceType = new ResourceType("instance");
+
+                List<Tag> tagList = new List<Tag>();
+                foreach (var item in body.tagDictionary)
+                {
+                    tagList.Add(new Tag(item.Key, item.Value));
+                }
+                tagSpecification.Tags = tagList;
+                runInstanceRequest.TagSpecifications.Add(tagSpecification);
+            }            
             return LaunchInstances(ec2Client, runInstanceRequest);
         }
 
@@ -56,7 +69,28 @@ namespace APIandSwagger.Class
         }
 
 
-        
+        /*
+        public static Task<DescribeImagesResponse> getAllImage(getAllInstanceBody body)
+        {
+            checkAWSKey();
+            var awsKey = new Amazon.Runtime.BasicAWSCredentials(AWSKey.accessKey, AWSKey.secretKey);
+            RegionEndpoint regionEndpoint = RegionEndpoint.GetBySystemName(body.region);
+            AmazonEC2Client ec2Client = new AmazonEC2Client(awsKey, regionEndpoint);
+            CancellationToken cancellationToken;
+            DescribeImagesRequest describeInstancesRequest = new DescribeImagesRequest();
+            List<string> test = new List<string>();
+            List<string> test2 = new List<string>();
+            test.Add("x86_64");
+            test2.Add("Linux");
+            describeInstancesRequest.Filters.Add(new Filter("architecture", test));
+            describeInstancesRequest.Filters.Add(new Filter("platform", test2));
+
+            var response = ec2Client.DescribeImagesAsync(describeInstancesRequest,cancellationToken);
+            return response;
+        }
+        */
+
+
         public static Task<DescribeInstancesResponse> getAllInstanceByFilter(getAllInstanceByFilterBody body)
         {
             checkAWSKey();

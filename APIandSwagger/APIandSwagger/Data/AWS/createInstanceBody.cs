@@ -13,7 +13,8 @@ namespace APIandSwagger
         [Required(ErrorMessage = "Region required", AllowEmptyStrings = false)]
         public string region { get; set; }
         [Required(ErrorMessage = "Image ID required", AllowEmptyStrings = false)]
-        public string imageID { get; set; }  
+        public string imageID { get; set; }
+        public Dictionary<string,string> tagDictionary;
         public int minCount = 1;
         public int maxCount = 1;
     }

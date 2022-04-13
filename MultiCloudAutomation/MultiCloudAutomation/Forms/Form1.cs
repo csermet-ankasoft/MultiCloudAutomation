@@ -37,8 +37,10 @@ namespace MultiCloudAutomation
 
         //Beginning Variables
         ResponseClass task;
-        
-        
+        List<AWS.InstanceDataGridView> instanceDataGridViewList;
+
+
+
         public async Task<ResponseClass> login()
         {
             AWS.LoginBody loginbody = new AWS.LoginBody(textBox1.Text, textBox2.Text);
@@ -66,32 +68,51 @@ namespace MultiCloudAutomation
         private async void button1_Click(object sender, EventArgs e)
         {            
             ResponseClass getallinstances = await getAllInstance("us-east-1");
-
-            List<AWS.InstanceDataGridView> instanceDataGridViewList = new List<AWS.InstanceDataGridView>();
+            instanceDataGridViewList = new List<AWS.InstanceDataGridView>();
             if (getallinstances.StatusCode == System.Net.HttpStatusCode.OK)
             {
-                string jsonbody = JsonConvert.SerializeObject(getallinstances);
-                JArray json_data = (JArray)JsonConvert.DeserializeObject(task.Content);
-                foreach (var item in json_data)
-                {
-                    AWS.InstanceDataGridView instance = new AWS.InstanceDataGridView();
-
-                    instance.InstanceId = item["instances"][0]["instanceId"].ToString();
-                    instance.InstanceState = item["instances"][0]["state"]["name"]["value"].ToString();
-                    instance.InstanceType = item["instances"][0]["instanceType"]["value"].ToString();
-                    instance.AvailabilityZone = item["instances"][0]["placement"]["availabilityZone"].ToString();
-                    instance.PublicIPv4DNS = item["instances"][0]["publicDnsName"].ToString();
-                    instance.PublicIPv4Address = item["instances"][0]["publicIpAddress"].ToString();
-                    instance.LaunchTime = item["instances"][0]["launchTime"].ToString();
-
-                    instanceDataGridViewList.Add(instance);
-                }
-                dataGridView1.DataSource = instanceDataGridViewList;
+                instanceToListInstanceAWS(getallinstances);
+                dataGridView1.DataSource = instanceDataGridViewList.ToList();
             }
             else if (getallinstances.StatusCode == System.Net.HttpStatusCode.Unauthorized)
             {
                 MessageBox.Show("Unauthorized Please First Login");
             }            
+        }
+
+        public void instanceToListInstanceAWS(ResponseClass getallinstances)
+        {
+            string jsonbody = JsonConvert.SerializeObject(getallinstances);
+            JArray json_data = (JArray)JsonConvert.DeserializeObject(task.Content);
+            foreach (var item in json_data)
+            {
+                AWS.InstanceDataGridView instance = new AWS.InstanceDataGridView();
+                instance.InstanceId = item["instances"][0]["instanceId"].ToString();
+                instance.InstanceState = item["instances"][0]["state"]["name"]["value"].ToString();
+                instance.InstanceType = item["instances"][0]["instanceType"]["value"].ToString();
+                instance.AvailabilityZone = item["instances"][0]["placement"]["availabilityZone"].ToString();
+                instance.PublicIPv4DNS = item["instances"][0]["publicDnsName"].ToString();
+                instance.PublicIPv4Address = item["instances"][0]["publicIpAddress"].ToString();
+                instance.LaunchTime = item["instances"][0]["launchTime"].ToString();
+
+                instanceDataGridViewList.Add(instance);
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void dataGridView1_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            /*
+            switch (e.ColumnIndex)
+            {
+                case 0:
+                    dataGridView1.DataSource = instanceDataGridViewList.OrderBy(o => o.InstanceId).ToList();
+                    break;
+            }
+            */
         }
     }
 }
