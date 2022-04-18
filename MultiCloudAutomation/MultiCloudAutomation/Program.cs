@@ -16,7 +16,7 @@ namespace MultiCloudAutomation
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new AddInstance());
+            Application.Run(new Form1());
         }
     }
 }

@@ -27,7 +27,11 @@ namespace APIandSwagger.Controllers.AWS
             {
                 return Unauthorized();
             }
-            
+            catch (Exception a)
+            {
+                return BadRequest(a.Message);
+            }
+
         }
 
         //aws/instance/getAllInstanceByFilter
@@ -42,7 +46,11 @@ namespace APIandSwagger.Controllers.AWS
             {
                 return Unauthorized();
             }
-            
+            catch (Exception a)
+            {
+                return BadRequest(a.Message);
+            }
+
         }
 
         //aws/instance/createInstance
@@ -57,6 +65,82 @@ namespace APIandSwagger.Controllers.AWS
             catch (KeyNotFoundException)
             {
                 return Unauthorized();
+            }
+            catch (Exception a)
+            {
+                return BadRequest(a.Message);
+            }
+        }
+
+        [HttpPost]
+        public IActionResult stopInstance([FromBody] InstanceIDListBody body)
+        {
+            try
+            {
+                var result = Class.AWSInstance.StopInstance(body).Result;
+                return Ok(result);
+            }
+            catch (KeyNotFoundException)
+            {
+                return Unauthorized();
+            }
+            catch (Exception a)
+            {
+                return BadRequest(a.Message);
+            }
+        }
+
+        [HttpPost]
+        public IActionResult startInstance([FromBody] InstanceIDListBody body)
+        {
+            try
+            {
+                var result = Class.AWSInstance.StartInstance(body).Result;
+                return Ok(result);
+            }
+            catch (KeyNotFoundException)
+            {
+                return Unauthorized();
+            }
+            catch (Exception a)
+            {
+                return BadRequest(a.Message);
+            }
+        }
+
+        [HttpPost]
+        public IActionResult rebootInstance([FromBody] InstanceIDListBody body)
+        {
+            try
+            {
+                var result = Class.AWSInstance.RebootInstance(body).Result;
+                return Ok(result);
+            }
+            catch (KeyNotFoundException)
+            {
+                return Unauthorized();
+            }
+            catch (Exception a)
+            {
+                return BadRequest(a.Message);
+            }
+        }
+
+        [HttpPost]
+        public IActionResult terminateInstance([FromBody] InstanceIDListBody body)
+        {
+            try
+            {
+                var result = Class.AWSInstance.TerminateInstance(body).Result;
+                return Ok(result);
+            }
+            catch (KeyNotFoundException)
+            {
+                return Unauthorized();
+            }
+            catch (Exception a)
+            {
+                return BadRequest(a.Message);
             }
         }
 

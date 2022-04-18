@@ -25,8 +25,8 @@ namespace APIandSwagger.Class
             var awskey = new Amazon.Runtime.BasicAWSCredentials(AWSKey.accessKey, AWSKey.secretKey);
             RegionEndpoint regionEndpoint = RegionEndpoint.GetBySystemName(body.region);
             AmazonEC2Client ec2Client = new AmazonEC2Client(awskey, regionEndpoint);
-            RunInstancesRequest runInstanceRequest = new RunInstancesRequest(body.imageID, body.minCount, body.maxCount);
-            runInstanceRequest.InstanceType = body.instanceType;
+            RunInstancesRequest InstanceRequest = new RunInstancesRequest(body.imageID, body.minCount, body.maxCount);
+            InstanceRequest.InstanceType = body.instanceType;
             if (body.tagDictionary != null)
             {
                 TagSpecification tagSpecification = new TagSpecification();
@@ -38,14 +38,13 @@ namespace APIandSwagger.Class
                     tagList.Add(new Tag(item.Key, item.Value));
                 }
                 tagSpecification.Tags = tagList;
-                runInstanceRequest.TagSpecifications.Add(tagSpecification);
+                InstanceRequest.TagSpecifications.Add(tagSpecification);
             }            
-            return LaunchInstances(ec2Client, runInstanceRequest);
+            return LaunchInstances(ec2Client, InstanceRequest);
         }
 
         private static async Task<List<string>> LaunchInstances(IAmazonEC2 ec2Client, RunInstancesRequest requestLaunch)
         {
-            checkAWSKey();
             var instanceIds = new List<string>();
             RunInstancesResponse responseLaunch = await ec2Client.RunInstancesAsync(requestLaunch);
 
@@ -55,6 +54,78 @@ namespace APIandSwagger.Class
             }
 
             return instanceIds;
+        }
+
+        public static Task<List<InstanceStateChange>> StopInstance(InstanceIDListBody instanceIDBody)
+        {
+            checkAWSKey();
+            var awskey = new Amazon.Runtime.BasicAWSCredentials(AWSKey.accessKey, AWSKey.secretKey);
+            RegionEndpoint regionEndpoint = RegionEndpoint.GetBySystemName(instanceIDBody.region);
+            AmazonEC2Client ec2Client = new AmazonEC2Client(awskey,regionEndpoint);
+            StopInstancesRequest InstanceRequest = new StopInstancesRequest(instanceIDBody.instanceList);
+            return StopInstances(ec2Client, InstanceRequest);
+        }
+
+        
+
+        private static async Task<List<InstanceStateChange>> StopInstances(IAmazonEC2 ec2Client, StopInstancesRequest requestLaunch)
+        {
+            StopInstancesResponse responseLaunch = await ec2Client.StopInstancesAsync(requestLaunch);
+            return responseLaunch.StoppingInstances;
+        }
+
+        public static Task<List<InstanceStateChange>> StartInstance(InstanceIDListBody instanceIDBody)
+        {
+            checkAWSKey();
+            var awskey = new Amazon.Runtime.BasicAWSCredentials(AWSKey.accessKey, AWSKey.secretKey);
+            RegionEndpoint regionEndpoint = RegionEndpoint.GetBySystemName(instanceIDBody.region);
+            AmazonEC2Client ec2Client = new AmazonEC2Client(awskey, regionEndpoint);
+            StartInstancesRequest InstanceRequest = new StartInstancesRequest(instanceIDBody.instanceList);
+            return StartInstances(ec2Client, InstanceRequest);
+        }
+
+
+
+        private static async Task<List<InstanceStateChange>> StartInstances(IAmazonEC2 ec2Client, StartInstancesRequest requestLaunch)
+        {
+            StartInstancesResponse responseLaunch = await ec2Client.StartInstancesAsync(requestLaunch);
+            return responseLaunch.StartingInstances;
+        }
+
+        public static Task<List<InstanceStateChange>> TerminateInstance(InstanceIDListBody instanceIDBody)
+        {
+            checkAWSKey();
+            var awskey = new Amazon.Runtime.BasicAWSCredentials(AWSKey.accessKey, AWSKey.secretKey);
+            RegionEndpoint regionEndpoint = RegionEndpoint.GetBySystemName(instanceIDBody.region);
+            AmazonEC2Client ec2Client = new AmazonEC2Client(awskey, regionEndpoint);
+            TerminateInstancesRequest InstanceRequest = new TerminateInstancesRequest(instanceIDBody.instanceList);
+            return TerminateInstances(ec2Client, InstanceRequest);
+        }
+
+
+
+        private static async Task<List<InstanceStateChange>> TerminateInstances(IAmazonEC2 ec2Client, TerminateInstancesRequest requestLaunch)
+        {
+            TerminateInstancesResponse responseLaunch = await ec2Client.TerminateInstancesAsync(requestLaunch);
+            return responseLaunch.TerminatingInstances;
+        }
+
+        public static Task<string> RebootInstance(InstanceIDListBody instanceIDBody)
+        {
+            checkAWSKey();
+            var awskey = new Amazon.Runtime.BasicAWSCredentials(AWSKey.accessKey, AWSKey.secretKey);
+            RegionEndpoint regionEndpoint = RegionEndpoint.GetBySystemName(instanceIDBody.region);
+            AmazonEC2Client ec2Client = new AmazonEC2Client(awskey, regionEndpoint);
+            RebootInstancesRequest InstanceRequest = new RebootInstancesRequest(instanceIDBody.instanceList);
+            return RebootInstances(ec2Client, InstanceRequest);
+        }
+
+
+
+        private static async Task<string> RebootInstances(IAmazonEC2 ec2Client, RebootInstancesRequest requestLaunch)
+        {
+            RebootInstancesResponse responseLaunch = await ec2Client.RebootInstancesAsync(requestLaunch);
+            return "Rebooting";
         }
 
         public static Task<DescribeInstancesResponse> getAllInstance(getAllInstanceBody body)

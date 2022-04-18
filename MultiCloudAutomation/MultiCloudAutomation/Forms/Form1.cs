@@ -30,9 +30,9 @@ namespace MultiCloudAutomation
             InitializeComponent();
         }
 
-
-        private void Form1_Load(object sender, EventArgs e)
+        private void newFormClossing(object sender, FormClosingEventArgs e)
         {
+            this.Show();
         }
 
         //Beginning Variables
@@ -63,7 +63,12 @@ namespace MultiCloudAutomation
             MessageBox.Show(loginList.Content);
         }
 
-        
+        private  void Form1_Load(object sender, EventArgs e)
+        {
+            
+        }
+
+
 
         private async void button1_Click(object sender, EventArgs e)
         {            
@@ -77,7 +82,11 @@ namespace MultiCloudAutomation
             else if (getallinstances.StatusCode == System.Net.HttpStatusCode.Unauthorized)
             {
                 MessageBox.Show("Unauthorized Please First Login");
-            }            
+            }
+            else
+            {
+                MessageBox.Show(getallinstances.StatusCode.ToString());
+            }
         }
 
         public void instanceToListInstanceAWS(ResponseClass getallinstances)
@@ -113,6 +122,14 @@ namespace MultiCloudAutomation
                     break;
             }
             */
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            AddInstance addInstanceForm = new AddInstance();
+            addInstanceForm.Show();
+            addInstanceForm.FormClosing += newFormClossing;
         }
     }
 }
