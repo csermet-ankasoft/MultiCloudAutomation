@@ -20,6 +20,7 @@ using Amazon.EC2.Model;
 using Amazon;
 using Newtonsoft.Json.Linq;
 using static MultiCloudAutomation.Request;
+using System.Net;
 
 namespace MultiCloudAutomation
 {
@@ -63,30 +64,42 @@ namespace MultiCloudAutomation
             MessageBox.Show(loginList.Content);
         }
 
-        private  void Form1_Load(object sender, EventArgs e)
+        private async void Form1_Load(object sender, EventArgs e)
         {
-            
+            HttpStatusCode dataGridViewRefreshStatusCode = await dataGridViewRefresh();
+            if (dataGridViewRefreshStatusCode == HttpStatusCode.OK)
+            {
+                timer1.Start();
+            }      
         }
 
-
-
-        private async void button1_Click(object sender, EventArgs e)
-        {            
+        public async Task<HttpStatusCode> dataGridViewRefresh()
+        {
             ResponseClass getallinstances = await getAllInstance("us-east-1");
             instanceDataGridViewList = new List<AWS.InstanceDataGridView>();
-            if (getallinstances.StatusCode == System.Net.HttpStatusCode.OK)
+            if (getallinstances.StatusCode == HttpStatusCode.OK)
             {
                 instanceToListInstanceAWS(getallinstances);
                 dataGridView1.DataSource = instanceDataGridViewList.ToList();
             }
-            else if (getallinstances.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+            else if (getallinstances.StatusCode == HttpStatusCode.Unauthorized)
             {
-                MessageBox.Show("Unauthorized Please First Login");
+                //MessageBox.Show("Unauthorized Please First Login");
+                
             }
             else
             {
                 MessageBox.Show(getallinstances.StatusCode.ToString());
             }
+            label2.Text = getallinstances.StatusCode.ToString();
+            return getallinstances.StatusCode;
+        }
+
+
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            dataGridViewRefresh();
         }
 
         public void instanceToListInstanceAWS(ResponseClass getallinstances)
@@ -130,6 +143,11 @@ namespace MultiCloudAutomation
             AddInstance addInstanceForm = new AddInstance();
             addInstanceForm.Show();
             addInstanceForm.FormClosing += newFormClossing;
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            dataGridViewRefresh();
         }
     }
 }
