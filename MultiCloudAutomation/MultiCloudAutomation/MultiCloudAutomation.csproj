@@ -184,6 +184,7 @@
     <Compile Include="Data\AWS\getAllInstanceBody.cs" />
     <Compile Include="Data\AWS\getAllInstanceByFilterBody.cs" />
     <Compile Include="Data\AWS\InstanceDataGridView.cs" />
+    <Compile Include="Data\AWS\InstanceIDListBody.cs" />
     <Compile Include="Data\AWS\LoginBody.cs" />
     <Compile Include="Data\Root.cs" />
     <Compile Include="Forms\AddInstance.cs">

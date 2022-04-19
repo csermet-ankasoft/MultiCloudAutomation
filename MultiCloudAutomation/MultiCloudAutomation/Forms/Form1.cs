@@ -39,8 +39,79 @@ namespace MultiCloudAutomation
         //Beginning Variables
         ResponseClass task;
         List<AWS.InstanceDataGridView> instanceDataGridViewList;
+        int selectedColumnIndex = 0;
+        string region = "us-east-1";
 
 
+        
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            timer1_Tick(sender,e);
+            timer1.Start();
+        }
+
+        private async void timer1_Tick(object sender, EventArgs e)
+        {
+            await dataGridViewRefresh();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            dataGridViewRefresh();
+        }
+
+        private async void button2_Click(object sender, EventArgs e)
+        {
+            ResponseClass loginList = await login();
+            MessageBox.Show(loginList.Content);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            AddInstance addInstanceForm = new AddInstance();
+            addInstanceForm.Show();
+            addInstanceForm.FormClosing += newFormClossing;
+        }   
+        
+        private async void button5_Click(object sender, EventArgs e)
+        {
+            var tempresult = await startInstance();
+            MessageBox.Show(tempresult.Content.ToString());
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            stopInstance();
+        }
+
+        private void buttonTerminate_Click(object sender, EventArgs e)
+        {
+            terminateInstance();
+        }
+
+        private void buttonReboot_Click(object sender, EventArgs e)
+        {
+            rebootInstance();
+        }
+
+        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
+        {
+            if (selectedColumnIndex != dataGridView1.CurrentCell.RowIndex)
+            {
+                selectedColumnIndex = dataGridView1.CurrentCell.RowIndex;
+                buttonStart.Enabled = true;
+                buttonStop.Enabled = true;
+                buttonTerminate.Enabled = true;
+                buttonReboot.Enabled = true;
+            }
+
+        }
 
         public async Task<ResponseClass> login()
         {
@@ -56,26 +127,11 @@ namespace MultiCloudAutomation
             string jsonbody = JsonConvert.SerializeObject(body);
             task = await Request.PostRequestAsync("aws/instance/getAllInstance", jsonbody);
             return task;
-        }
-
-        private async void button2_Click(object sender, EventArgs e)
-        {
-            ResponseClass loginList = await login();
-            MessageBox.Show(loginList.Content);
-        }
-
-        private async void Form1_Load(object sender, EventArgs e)
-        {
-            HttpStatusCode dataGridViewRefreshStatusCode = await dataGridViewRefresh();
-            if (dataGridViewRefreshStatusCode == HttpStatusCode.OK)
-            {
-                timer1.Start();
-            }      
-        }
+        }        
 
         public async Task<HttpStatusCode> dataGridViewRefresh()
         {
-            ResponseClass getallinstances = await getAllInstance("us-east-1");
+            ResponseClass getallinstances = await getAllInstance(region);
             instanceDataGridViewList = new List<AWS.InstanceDataGridView>();
             if (getallinstances.StatusCode == HttpStatusCode.OK)
             {
@@ -85,7 +141,6 @@ namespace MultiCloudAutomation
             else if (getallinstances.StatusCode == HttpStatusCode.Unauthorized)
             {
                 //MessageBox.Show("Unauthorized Please First Login");
-                
             }
             else
             {
@@ -93,14 +148,7 @@ namespace MultiCloudAutomation
             }
             label2.Text = getallinstances.StatusCode.ToString();
             return getallinstances.StatusCode;
-        }
-
-
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            dataGridViewRefresh();
-        }
+        }        
 
         public void instanceToListInstanceAWS(ResponseClass getallinstances)
         {
@@ -121,9 +169,58 @@ namespace MultiCloudAutomation
             }
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        public async Task<ResponseClass> startInstance()
         {
+            List<string> templist = new List<string>();
+            templist.Add(dataGridView1.Rows[selectedColumnIndex].Cells[0].Value.ToString());
+            AWS.InstanceIDListBody loginbody = new AWS.InstanceIDListBody(templist, region);
+            string jsonbody = JsonConvert.SerializeObject(loginbody);
+            task = await Request.PostRequestAsync("aws/instance/startInstance", jsonbody);
+            System.Threading.Thread.Sleep(1000);
+            await WaitFiveSecond();
+            return task;
         }
+
+        public async Task<ResponseClass> stopInstance()
+        {
+            List<string> templist = new List<string>();
+            templist.Add(dataGridView1.Rows[selectedColumnIndex].Cells[0].Value.ToString());
+            AWS.InstanceIDListBody loginbody = new AWS.InstanceIDListBody(templist, region);
+            string jsonbody = JsonConvert.SerializeObject(loginbody);
+            task = await Request.PostRequestAsync("aws/instance/stopInstance", jsonbody);
+            await WaitFiveSecond();
+            return task;
+        }
+
+        public async Task<ResponseClass> rebootInstance()
+        {
+            List<string> templist = new List<string>();
+            templist.Add(dataGridView1.Rows[selectedColumnIndex].Cells[0].Value.ToString());
+            AWS.InstanceIDListBody loginbody = new AWS.InstanceIDListBody(templist, region);
+            string jsonbody = JsonConvert.SerializeObject(loginbody);
+            task = await Request.PostRequestAsync("aws/instance/rebootInstance", jsonbody);
+            await WaitFiveSecond();
+            return task;
+        }
+
+        public async Task<ResponseClass> terminateInstance()
+        {
+            List<string> templist = new List<string>();
+            templist.Add(dataGridView1.Rows[selectedColumnIndex].Cells[0].Value.ToString());
+            AWS.InstanceIDListBody loginbody = new AWS.InstanceIDListBody(templist, region);
+            string jsonbody = JsonConvert.SerializeObject(loginbody);
+            task = await Request.PostRequestAsync("aws/instance/terminateInstance", jsonbody);
+            await WaitFiveSecond();
+            return task;
+        }
+
+        public async Task WaitFiveSecond()
+        {
+            await Task.Delay(2000);
+            dataGridViewRefresh();
+        }
+
+
 
         private void dataGridView1_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
@@ -137,17 +234,6 @@ namespace MultiCloudAutomation
             */
         }
 
-        private void button4_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            AddInstance addInstanceForm = new AddInstance();
-            addInstanceForm.Show();
-            addInstanceForm.FormClosing += newFormClossing;
-        }
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            dataGridViewRefresh();
-        }
+        
     }
 }
