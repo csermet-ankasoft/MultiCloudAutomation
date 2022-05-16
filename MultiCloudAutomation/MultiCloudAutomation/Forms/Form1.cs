@@ -53,7 +53,14 @@ namespace MultiCloudAutomation
 
         private async void timer1_Tick(object sender, EventArgs e)
         {
-            await dataGridViewRefresh();
+            try
+            {
+                await dataGridViewRefresh();
+            }
+            catch (Exception)
+            {
+                
+            }            
         }
 
         private void button1_Click(object sender, EventArgs e)

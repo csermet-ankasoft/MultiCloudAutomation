@@ -14,7 +14,7 @@ namespace APIandSwagger.Controllers.AWS
     [ApiController]
     public class AWSController : ControllerBase
     {
-        // POST: api/AWS
+       
         [HttpPost]
         public string setCredential([FromBody] AWSKeyBody value)
         {

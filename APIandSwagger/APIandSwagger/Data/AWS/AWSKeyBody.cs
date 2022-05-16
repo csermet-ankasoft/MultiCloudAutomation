@@ -7,7 +7,7 @@ namespace APIandSwagger
 {
     public class AWSKeyBody
     {
-        public string accessKey = "t";
+        public string accessKey = "";
         public string secretKey = "";
     }
 }

@@ -27,9 +27,9 @@ namespace APIandSwagger.Controllers.AWS
             {
                 return Unauthorized();
             }
-            catch (Exception a)
+            catch (Exception exception)
             {
-                return BadRequest(a.Message);
+                return BadRequest(exception.Message);
             }
 
         }
@@ -46,9 +46,9 @@ namespace APIandSwagger.Controllers.AWS
             {
                 return Unauthorized();
             }
-            catch (Exception a)
+            catch (Exception exception)
             {
-                return BadRequest(a.Message);
+                return BadRequest(exception.Message);
             }
 
         }
@@ -66,9 +66,9 @@ namespace APIandSwagger.Controllers.AWS
             {
                 return Unauthorized();
             }
-            catch (Exception a)
+            catch (Exception exception)
             {
-                return BadRequest(a.Message);
+                return BadRequest(exception.Message);
             }
         }
 
@@ -84,9 +84,9 @@ namespace APIandSwagger.Controllers.AWS
             {
                 return Unauthorized();
             }
-            catch (Exception a)
+            catch (Exception exception)
             {
-                return BadRequest(a.Message);
+                return BadRequest(exception.Message);
             }
         }
 
@@ -102,9 +102,9 @@ namespace APIandSwagger.Controllers.AWS
             {
                 return Unauthorized();
             }
-            catch (Exception a)
+            catch (Exception exception)
             {
-                return BadRequest(a.Message);
+                return BadRequest(exception.Message);
             }
         }
 
@@ -120,9 +120,9 @@ namespace APIandSwagger.Controllers.AWS
             {
                 return Unauthorized();
             }
-            catch (Exception a)
+            catch (Exception exception)
             {
-                return BadRequest(a.Message);
+                return BadRequest(exception.Message);
             }
         }
 
@@ -138,9 +138,9 @@ namespace APIandSwagger.Controllers.AWS
             {
                 return Unauthorized();
             }
-            catch (Exception a)
+            catch (Exception exception)
             {
-                return BadRequest(a.Message);
+                return BadRequest(exception.Message);
             }
         }
 

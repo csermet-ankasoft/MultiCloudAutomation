@@ -36,6 +36,7 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.buttonReboot = new System.Windows.Forms.Button();
             this.buttonTerminate = new System.Windows.Forms.Button();
             this.buttonStop = new System.Windows.Forms.Button();
@@ -47,7 +48,6 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.label1 = new System.Windows.Forms.Label();
             this.virtualizationTypeBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.blockDeviceMappingBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.ınstanceTypeBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -137,6 +137,15 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1307, 611);
             this.panel2.TabIndex = 9;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(721, 17);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(35, 13);
+            this.label1.TabIndex = 16;
+            this.label1.Text = "label1";
             // 
             // buttonReboot
             // 
@@ -250,15 +259,6 @@
             this.timer1.Interval = 12000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(721, 17);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 16;
-            this.label1.Text = "label1";
-            // 
             // virtualizationTypeBindingSource
             // 
             this.virtualizationTypeBindingSource.DataSource = typeof(MultiCloudAutomation.Data.VirtualizationType);
@@ -279,7 +279,7 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Multi Cloud Automation";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panel1.ResumeLayout(false);
