@@ -193,6 +193,24 @@
     <Compile Include="Forms\AddInstance.Designer.cs">
       <DependentUpon>AddInstance.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\AWS_CREDENTIAL.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AWS_CREDENTIAL.Designer.cs">
+      <DependentUpon>AWS_CREDENTIAL.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\AZURE_CREDENTIAL.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AZURE_CREDENTIAL.Designer.cs">
+      <DependentUpon>AZURE_CREDENTIAL.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\First Page.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\First Page.Designer.cs">
+      <DependentUpon>First Page.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -203,6 +221,15 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\AddInstance.resx">
       <DependentUpon>AddInstance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AWS_CREDENTIAL.resx">
+      <DependentUpon>AWS_CREDENTIAL.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AZURE_CREDENTIAL.resx">
+      <DependentUpon>AZURE_CREDENTIAL.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\First Page.resx">
+      <DependentUpon>First Page.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
@@ -215,6 +242,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\MultiCloudAutomation.Data.Architecture.datasource" />
@@ -265,6 +293,12 @@
   <ItemGroup>
     <Analyzer Include="..\packages\AWSSDK.EC2.3.7.61.2\analyzers\dotnet\cs\AWSSDK.EC2.CodeAnalysis.dll" />
     <Analyzer Include="..\packages\AWSSDK.S3.3.7.8.10\analyzers\dotnet\cs\AWSSDK.S3.CodeAnalysis.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\UI_1__6-512.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Leave.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
