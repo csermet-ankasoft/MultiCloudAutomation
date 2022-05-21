@@ -44,10 +44,10 @@
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(233, 314);
+            this.button2.Location = new System.Drawing.Point(260, 314);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(120, 41);
-            this.button2.TabIndex = 10;
+            this.button2.TabIndex = 5;
             this.button2.Text = "Düzenle";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
@@ -89,8 +89,8 @@
             this.textBoxClientSecret.Name = "textBoxClientSecret";
             this.textBoxClientSecret.PasswordChar = '*';
             this.textBoxClientSecret.ReadOnly = true;
-            this.textBoxClientSecret.Size = new System.Drawing.Size(333, 29);
-            this.textBoxClientSecret.TabIndex = 6;
+            this.textBoxClientSecret.Size = new System.Drawing.Size(360, 29);
+            this.textBoxClientSecret.TabIndex = 2;
             // 
             // textBoxClientID
             // 
@@ -98,8 +98,8 @@
             this.textBoxClientID.Location = new System.Drawing.Point(20, 85);
             this.textBoxClientID.Name = "textBoxClientID";
             this.textBoxClientID.ReadOnly = true;
-            this.textBoxClientID.Size = new System.Drawing.Size(333, 29);
-            this.textBoxClientID.TabIndex = 5;
+            this.textBoxClientID.Size = new System.Drawing.Size(360, 29);
+            this.textBoxClientID.TabIndex = 1;
             // 
             // textBoxTenantID
             // 
@@ -108,8 +108,8 @@
             this.textBoxTenantID.Name = "textBoxTenantID";
             this.textBoxTenantID.PasswordChar = '*';
             this.textBoxTenantID.ReadOnly = true;
-            this.textBoxTenantID.Size = new System.Drawing.Size(333, 29);
-            this.textBoxTenantID.TabIndex = 6;
+            this.textBoxTenantID.Size = new System.Drawing.Size(360, 29);
+            this.textBoxTenantID.TabIndex = 3;
             // 
             // label4
             // 
@@ -128,8 +128,8 @@
             this.textBoxSubscriptionID.Name = "textBoxSubscriptionID";
             this.textBoxSubscriptionID.PasswordChar = '*';
             this.textBoxSubscriptionID.ReadOnly = true;
-            this.textBoxSubscriptionID.Size = new System.Drawing.Size(333, 29);
-            this.textBoxSubscriptionID.TabIndex = 6;
+            this.textBoxSubscriptionID.Size = new System.Drawing.Size(360, 29);
+            this.textBoxSubscriptionID.TabIndex = 4;
             // 
             // label5
             // 
@@ -150,7 +150,7 @@
             this.button1.Location = new System.Drawing.Point(9, 5);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(40, 40);
-            this.button1.TabIndex = 11;
+            this.button1.TabIndex = 6;
             this.button1.UseVisualStyleBackColor = false;
             // 
             // AZURE_CREDENTIAL
@@ -158,7 +158,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.ClientSize = new System.Drawing.Size(372, 407);
+            this.ClientSize = new System.Drawing.Size(404, 411);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.label3);

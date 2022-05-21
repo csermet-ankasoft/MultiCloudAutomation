@@ -60,7 +60,7 @@ namespace MultiCloudAutomation.Forms
         {
             credentialRead();
             ResponseClass logintext = await login();
-            ResponseClass getallinstances = await getAllInstance("us-east-1");
+            ResponseClass getallinstances = await getAllInstanceTEST("us-east-1");
             labelTest.Text = "HTTP Kodu : " + getallinstances.StatusCode.ToString();
         }
 
@@ -105,7 +105,7 @@ namespace MultiCloudAutomation.Forms
             return task;
         }
 
-        public async Task<ResponseClass> getAllInstance(string region)
+        public async Task<ResponseClass> getAllInstanceTEST(string region)
         {
             AWS.getAllInstanceBody body = new AWS.getAllInstanceBody(region);
             string jsonbody = JsonConvert.SerializeObject(body);
