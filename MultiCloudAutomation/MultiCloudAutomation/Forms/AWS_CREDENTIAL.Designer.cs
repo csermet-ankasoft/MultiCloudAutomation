@@ -93,9 +93,9 @@
             this.labelTest.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelTest.Location = new System.Drawing.Point(18, 243);
             this.labelTest.Name = "labelTest";
-            this.labelTest.Size = new System.Drawing.Size(128, 25);
+            this.labelTest.Size = new System.Drawing.Size(214, 25);
             this.labelTest.TabIndex = 2;
-            this.labelTest.Text = "HTTP Kodu :";
+            this.labelTest.Text = "HTTP Kodu : Waiting...";
             // 
             // button1
             // 
@@ -123,7 +123,7 @@
             this.Controls.Add(this.textBoxSecretKEY);
             this.Controls.Add(this.textBoxAccessKEY);
             this.Name = "AWS_CREDENTIAL";
-            this.Text = "AWS_CREDENTIAL";
+            this.Text = "Multi Cloud Automation";
             this.Load += new System.EventHandler(this.AWS_CREDENTIAL_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

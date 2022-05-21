@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -58,6 +59,8 @@ namespace MultiCloudAutomation.Forms
                 textBoxClientSecret.ReadOnly = true;
                 textBoxTenantID.ReadOnly = true;
                 textBoxSubscriptionID.ReadOnly = true;
+                labelTest.Text = "HTTP Kodu : Waiting...";
+                loginAndText();
                 button2.Text = "Düzenle";
             }
             
@@ -66,6 +69,14 @@ namespace MultiCloudAutomation.Forms
         private void AZURE_CREDENTIAL_Load(object sender, EventArgs e)
         {
             credentialRead();
+            loginAndText();
+        }
+
+        public async void loginAndText()
+        {
+            ResponseClass logintext = await loginAzure();
+            var VMNameGettest = await VMNameGetTest();
+            labelTest.Text = "HTTP Kodu : " + VMNameGettest.StatusCode.ToString();
         }
 
 
@@ -108,6 +119,20 @@ namespace MultiCloudAutomation.Forms
                 fs.Close();
                 MessageBox.Show("Credential Dosyası okunurken bir hata meydana geldi...\n" + exception.Message);
             }
+        }
+
+        public async Task<ResponseClass> VMNameGetTest()
+        {
+            ResponseClass task = await Request.GetRequestAsync("azure/vmNameGet");
+            return task;
+        }
+
+        public async Task<ResponseClass> loginAzure()
+        {
+            AZURE.LoginBody loginbody = new AZURE.LoginBody(textBoxClientID.Text, textBoxClientSecret.Text, textBoxTenantID.Text, textBoxSubscriptionID.Text);
+            string jsonbody = JsonConvert.SerializeObject(loginbody);
+            ResponseClass task = await Request.PostRequestAsync("azure/setCredential", jsonbody);
+            return task;
         }
     }
 }

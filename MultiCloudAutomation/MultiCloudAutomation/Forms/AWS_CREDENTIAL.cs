@@ -52,13 +52,20 @@ namespace MultiCloudAutomation.Forms
                 }
                 textBoxAccessKEY.ReadOnly = true;
                 textBoxSecretKEY.ReadOnly = true;
+                labelTest.Text = "HTTP Kodu : Waiting...";
+                loginAndText();
                 button2.Text = "Düzenle";
             }
         }
 
-        private async void AWS_CREDENTIAL_Load(object sender, EventArgs e)
+        private void AWS_CREDENTIAL_Load(object sender, EventArgs e)
         {
             credentialRead();
+            loginAndText();
+        }
+
+        public async void loginAndText()
+        {
             ResponseClass logintext = await login();
             ResponseClass getallinstances = await getAllInstanceTEST("us-east-1");
             labelTest.Text = "HTTP Kodu : " + getallinstances.StatusCode.ToString();
@@ -67,7 +74,7 @@ namespace MultiCloudAutomation.Forms
         public void credentialRead()
         {
             string dosya_yolu = @"C:\Users\" + Environment.UserName + @"\.aws\credentials\username.txt";
-            FileStream fs = new FileStream(dosya_yolu, FileMode.Open, FileAccess.Read);
+            FileStream fs = new FileStream(dosya_yolu, FileMode.OpenOrCreate, FileAccess.Read);
             try
             {
                 StreamReader sw = new StreamReader(fs);

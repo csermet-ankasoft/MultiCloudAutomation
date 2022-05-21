@@ -16,7 +16,7 @@ namespace MultiCloudAutomation
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Forms.AZURE_CREDENTIAL());
+            Application.Run(new Forms.First_Page());
         }
     }
 }
