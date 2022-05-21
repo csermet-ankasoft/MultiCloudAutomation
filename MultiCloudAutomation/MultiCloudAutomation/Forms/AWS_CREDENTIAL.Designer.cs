@@ -33,7 +33,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.labelTest = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -87,15 +87,15 @@
             this.label2.TabIndex = 2;
             this.label2.Text = "Secret KEY";
             // 
-            // label3
+            // labelTest
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(18, 243);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(67, 25);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Test : ";
+            this.labelTest.AutoSize = true;
+            this.labelTest.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTest.Location = new System.Drawing.Point(18, 243);
+            this.labelTest.Name = "labelTest";
+            this.labelTest.Size = new System.Drawing.Size(128, 25);
+            this.labelTest.TabIndex = 2;
+            this.labelTest.Text = "HTTP Kodu :";
             // 
             // button1
             // 
@@ -117,7 +117,7 @@
             this.ClientSize = new System.Drawing.Size(390, 287);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.labelTest);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBoxSecretKEY);
@@ -137,7 +137,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label labelTest;
         private System.Windows.Forms.Button button1;
     }
 }

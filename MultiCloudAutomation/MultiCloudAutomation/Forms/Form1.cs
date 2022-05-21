@@ -70,8 +70,8 @@ namespace MultiCloudAutomation
 
         private async void button2_Click(object sender, EventArgs e)
         {
-            ResponseClass loginList = await login();
-            MessageBox.Show(loginList.Content);
+            //ResponseClass loginList = await login();
+            //MessageBox.Show(loginList.Content);
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -118,14 +118,6 @@ namespace MultiCloudAutomation
                 buttonReboot.Enabled = true;
             }
 
-        }
-
-        public async Task<ResponseClass> login()
-        {
-            AWS.LoginBody loginbody = new AWS.LoginBody(textBox1.Text, textBox2.Text);
-            string jsonbody = JsonConvert.SerializeObject(loginbody);
-            task = await Request.PostRequestAsync("aws/setCredential", jsonbody);
-            return task;
         }
         
         public async Task<ResponseClass> getAllInstance(string region)
