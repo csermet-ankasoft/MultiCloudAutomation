@@ -63,22 +63,14 @@ namespace MultiCloudAutomation
             }            
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private async void refresh_Click(object sender, EventArgs e)
         {
-            dataGridViewRefresh();
+            labelHTTP.Text = "Waiting...";
+            await dataGridViewRefresh();
+
         }
 
-        private async void button2_Click(object sender, EventArgs e)
-        {
-            //ResponseClass loginList = await login();
-            //MessageBox.Show(loginList.Content);
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button4_Click(object sender, EventArgs e)
+        private void buttonCreateInstance_Click(object sender, EventArgs e)
         {
             this.Hide();
             AddInstance addInstanceForm = new AddInstance();
@@ -86,25 +78,24 @@ namespace MultiCloudAutomation
             addInstanceForm.FormClosing += newFormClossing;
         }   
         
-        private async void button5_Click(object sender, EventArgs e)
+        private async void startInstance_Click(object sender, EventArgs e)
         {
-            var tempresult = await startInstance();
-            MessageBox.Show(tempresult.Content.ToString());
+            await startInstance();
         }
 
-        private void button6_Click(object sender, EventArgs e)
+        private async void stopInstance_Click(object sender, EventArgs e)
         {
-            stopInstance();
+            await stopInstance();
         }
 
-        private void buttonTerminate_Click(object sender, EventArgs e)
+        private async void buttonTerminate_Click(object sender, EventArgs e)
         {
-            terminateInstance();
+            await terminateInstance();
         }
 
-        private void buttonReboot_Click(object sender, EventArgs e)
+        private async void buttonReboot_Click(object sender, EventArgs e)
         {
-            rebootInstance();
+            await rebootInstance();
         }
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
@@ -145,7 +136,7 @@ namespace MultiCloudAutomation
             {
                 MessageBox.Show(getallinstances.StatusCode.ToString());
             }
-            label2.Text = getallinstances.StatusCode.ToString();
+            labelHTTP.Text = getallinstances.StatusCode.ToString();
             return getallinstances.StatusCode;
         }        
 
@@ -233,6 +224,9 @@ namespace MultiCloudAutomation
             */
         }
 
-        
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
