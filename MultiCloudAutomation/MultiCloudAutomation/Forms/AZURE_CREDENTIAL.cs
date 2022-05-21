@@ -123,7 +123,7 @@ namespace MultiCloudAutomation.Forms
 
         public async Task<ResponseClass> VMNameGetTest()
         {
-            ResponseClass task = await Request.GetRequestAsync("azure/vmNameGet");
+            ResponseClass task = await Request.GetRequestAsync("azure/getVMSimple");
             return task;
         }
 

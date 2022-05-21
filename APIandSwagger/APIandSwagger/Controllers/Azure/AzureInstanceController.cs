@@ -19,11 +19,11 @@ namespace APIandSwagger.Controllers.AWS
     {
 
         [HttpGet]
-        public IActionResult vmNameGet()
+        public IActionResult getVMSimple()
         {
             try
             {
-                return Ok(Azure.Instance.vmNameGet());
+                return Ok(Azure.Instance.getVMSimple());
             }
             catch (KeyNotFoundException)
             {

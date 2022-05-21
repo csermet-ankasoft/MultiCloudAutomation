@@ -38,7 +38,7 @@ namespace MultiCloudAutomation
 
         //Beginning Variables
         ResponseClass task;
-        List<AWS.InstanceDataGridView> instanceDataGridViewList;
+        List<DataGridViewVM> instanceDataGridViewList;
         int selectedColumnIndex = 0;
         string region = "us-east-1";
 
@@ -55,18 +55,19 @@ namespace MultiCloudAutomation
         {
             try
             {
-                await dataGridViewRefresh();
+                dataGridViewRefresh();
             }
-            catch (Exception)
+            catch (Exception exception)
             {
-                
+                MessageBox.Show(exception.Message);
             }            
         }
 
         private async void refresh_Click(object sender, EventArgs e)
         {
-            labelHTTP.Text = "Waiting...";
-            await dataGridViewRefresh();
+            labelHTTPAWS.Text = "AWS HTTP: Waiting...";
+            labelHTTPAZURE.Text = "AZURE HTTP: Waiting...";
+            dataGridViewRefresh();
 
         }
 
@@ -80,7 +81,7 @@ namespace MultiCloudAutomation
         
         private async void startInstance_Click(object sender, EventArgs e)
         {
-            await startInstance();
+                await startInstance();
         }
 
         private async void stopInstance_Click(object sender, EventArgs e)
@@ -104,57 +105,92 @@ namespace MultiCloudAutomation
             {
                 selectedColumnIndex = dataGridView1.CurrentCell.RowIndex;
                 buttonStart.Enabled = true;
-                buttonStop.Enabled = true;
                 buttonTerminate.Enabled = true;
                 buttonReboot.Enabled = true;
+                buttonStop.Enabled = true;                
             }
 
+        }     
+
+        public async void dataGridViewRefresh()
+        {
+            instanceDataGridViewList = new List<DataGridViewVM>();
+            await AWSDGVListAdd();
+            await AZUREDGVListAdd();
+            dataGridView1.DataSource = instanceDataGridViewList.ToList();
         }
-        
-        public async Task<ResponseClass> getAllInstance(string region)
+
+        public async Task<string> AWSDGVListAdd()
+        {
+            ResponseClass instances = await AWSAllInstance(region);            
+            if (instances.StatusCode == HttpStatusCode.OK)
+            {
+                AWSinstance_To_DataGridViewVMList(instances);
+            }
+            labelHTTPAWS.Text = "AWS HTTP: " + instances.StatusCode.ToString();
+            return instances.StatusCode.ToString();
+        }
+        public async Task<string> AZUREDGVListAdd()
+        {
+            ResponseClass instances = await AZUREAllInstance();
+            if (instances.StatusCode == HttpStatusCode.OK)
+            {
+                AZUREinstance_To_DataGridViewVMList(instances);
+            }
+            labelHTTPAZURE.Text = "AZURE HTTP: " + instances.StatusCode.ToString();
+            return instances.StatusCode.ToString();
+        }
+
+        public async Task<ResponseClass> AWSAllInstance(string region)
         {
             AWS.getAllInstanceBody body = new AWS.getAllInstanceBody(region);
             string jsonbody = JsonConvert.SerializeObject(body);
             task = await Request.PostRequestAsync("aws/instance/getAllInstance", jsonbody);
             return task;
-        }        
+        }
 
-        public async Task<HttpStatusCode> dataGridViewRefresh()
+        public void AWSinstance_To_DataGridViewVMList(ResponseClass instances)
         {
-            ResponseClass getallinstances = await getAllInstance(region);
-            instanceDataGridViewList = new List<AWS.InstanceDataGridView>();
-            if (getallinstances.StatusCode == HttpStatusCode.OK)
-            {
-                instanceToListInstanceAWS(getallinstances);
-                dataGridView1.DataSource = instanceDataGridViewList.ToList();
-            }
-            else if (getallinstances.StatusCode == HttpStatusCode.Unauthorized)
-            {
-                //MessageBox.Show("Unauthorized Please First Login");
-            }
-            else
-            {
-                MessageBox.Show(getallinstances.StatusCode.ToString());
-            }
-            labelHTTP.Text = getallinstances.StatusCode.ToString();
-            return getallinstances.StatusCode;
-        }        
-
-        public void instanceToListInstanceAWS(ResponseClass getallinstances)
-        {
-            string jsonbody = JsonConvert.SerializeObject(getallinstances);
+            string jsonbody = JsonConvert.SerializeObject(instances);
             JArray json_data = (JArray)JsonConvert.DeserializeObject(task.Content);
             foreach (var item in json_data)
             {
-                AWS.InstanceDataGridView instance = new AWS.InstanceDataGridView();
-                instance.InstanceId = item["instances"][0]["instanceId"].ToString();
+                DataGridViewVM instance = new DataGridViewVM();
+                instance.InstanceName = "";
+                foreach (var tag in item["instances"][0]["tags"])
+                {
+                    if (tag["key"].ToString() == "Name")
+                    {
+                        instance.InstanceName =tag["value"].ToString();
+                        break;
+                    }
+                }                
                 instance.InstanceState = item["instances"][0]["state"]["name"]["value"].ToString();
                 instance.InstanceType = item["instances"][0]["instanceType"]["value"].ToString();
-                instance.AvailabilityZone = item["instances"][0]["placement"]["availabilityZone"].ToString();
-                instance.PublicIPv4DNS = item["instances"][0]["publicDnsName"].ToString();
-                instance.PublicIPv4Address = item["instances"][0]["publicIpAddress"].ToString();
-                instance.LaunchTime = item["instances"][0]["launchTime"].ToString();
+                instance.OSType = item["instances"][0]["platformDetails"].ToString();
+                instance.PublicIP= item["instances"][0]["publicIpAddress"].ToString();
+                instanceDataGridViewList.Add(instance);
+            }
+        }
 
+        public async Task<ResponseClass> AZUREAllInstance()
+        {
+            task = await Request.GetRequestAsync("azure/getVMSimple");
+            return task;
+        }
+
+        public void AZUREinstance_To_DataGridViewVMList(ResponseClass instances)
+        {
+            string jsonbody = JsonConvert.SerializeObject(instances);
+            JArray json_data = (JArray)JsonConvert.DeserializeObject(task.Content);
+            foreach (var item in json_data)
+            {
+                DataGridViewVM instance = new DataGridViewVM();
+                instance.InstanceName = item["instanceName"].ToString();
+                instance.InstanceState = item["instanceState"].ToString();
+                instance.InstanceType = item["instanceType"].ToString();
+                instance.OSType = item["osType"].ToString();
+                instance.PublicIP = item["publicIP"].ToString();
                 instanceDataGridViewList.Add(instance);
             }
         }
@@ -206,7 +242,7 @@ namespace MultiCloudAutomation
 
         public async Task WaitFiveSecond()
         {
-            await Task.Delay(2000);
+            await Task.Delay(5000);
             dataGridViewRefresh();
         }
 
@@ -214,14 +250,6 @@ namespace MultiCloudAutomation
 
         private void dataGridView1_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            /*
-            switch (e.ColumnIndex)
-            {
-                case 0:
-                    dataGridView1.DataSource = instanceDataGridViewList.OrderBy(o => o.InstanceId).ToList();
-                    break;
-            }
-            */
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)

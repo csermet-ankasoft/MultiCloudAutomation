@@ -21,17 +21,29 @@ namespace APIandSwagger.Azure
         }
 
 
-        public static IEnumerable<string> vmNameGet()
+        public static List<Azure.VMSimpleBody> getVMSimple()
         {
             checkAzureCredential();
             var virtualMachines = Credential.azure.VirtualMachines.List();
             List<Microsoft.Azure.Management.Compute.Fluent.IVirtualMachine> virtualMachinesList = virtualMachines.ToList();
-            List<string> vmNameList = new List<string>();
+            List<Azure.VMSimpleBody> vmList = new List<Azure.VMSimpleBody>();
             for (int i = 0; i < virtualMachinesList.Count; i++)
             {
-                vmNameList.Add(virtualMachinesList[i].Name);
+                Azure.VMSimpleBody temp = new Azure.VMSimpleBody();
+                temp.InstanceName = virtualMachinesList[i].Name;
+                string PowerStateUnFiltered = virtualMachinesList[i].PowerState.Value;
+                string PowerStateFiltered = "";
+                for (int j = 11; j < PowerStateUnFiltered.Length; j++)
+                {
+                    PowerStateFiltered += PowerStateUnFiltered[j];
+                }
+                temp.InstanceState = PowerStateFiltered;
+                temp.OSType = virtualMachinesList[i].OSType.ToString();
+                temp.InstanceType = virtualMachinesList[i].Size.Value;
+                temp.PublicIP = virtualMachinesList[i].GetPrimaryPublicIPAddress().IPAddress;
+                vmList.Add(temp);
             }
-            return vmNameList;
+            return vmList;
         }
     }
 }

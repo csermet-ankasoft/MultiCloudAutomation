@@ -45,7 +45,7 @@
             this.buttonAzureCred.BackColor = System.Drawing.Color.MediumAquamarine;
             this.buttonAzureCred.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonAzureCred.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonAzureCred.Location = new System.Drawing.Point(15, 231);
+            this.buttonAzureCred.Location = new System.Drawing.Point(21, 231);
             this.buttonAzureCred.Name = "buttonAzureCred";
             this.buttonAzureCred.Size = new System.Drawing.Size(164, 100);
             this.buttonAzureCred.TabIndex = 0;
@@ -58,7 +58,7 @@
             this.buttonAWSCred.BackColor = System.Drawing.Color.MediumAquamarine;
             this.buttonAWSCred.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonAWSCred.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonAWSCred.Location = new System.Drawing.Point(15, 71);
+            this.buttonAWSCred.Location = new System.Drawing.Point(21, 71);
             this.buttonAWSCred.Name = "buttonAWSCred";
             this.buttonAWSCred.Size = new System.Drawing.Size(164, 100);
             this.buttonAWSCred.TabIndex = 0;
@@ -86,16 +86,16 @@
             this.panel1.Controls.Add(this.buttonAWSCred);
             this.panel1.Controls.Add(this.buttonAzureCred);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel1.Location = new System.Drawing.Point(292, 0);
+            this.panel1.Location = new System.Drawing.Point(279, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(192, 361);
+            this.panel1.Size = new System.Drawing.Size(205, 361);
             this.panel1.TabIndex = 2;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(8, 9);
+            this.label1.Location = new System.Drawing.Point(13, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(180, 29);
             this.label1.TabIndex = 1;
@@ -115,25 +115,25 @@
             // 
             // panel2
             // 
-            this.panel2.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.panel2.BackColor = System.Drawing.Color.SlateBlue;
             this.panel2.Controls.Add(this.label2);
             this.panel2.Controls.Add(this.buttonVM);
             this.panel2.Controls.Add(this.button4);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(292, 361);
+            this.panel2.Size = new System.Drawing.Size(279, 361);
             this.panel2.TabIndex = 3;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(57, 9);
+            this.label2.Location = new System.Drawing.Point(37, 9);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(145, 29);
+            this.label2.Size = new System.Drawing.Size(203, 29);
             this.label2.TabIndex = 1;
-            this.label2.Text = "SERVISLER";
+            this.label2.Text = "[-- SERVISLER --]";
             // 
             // First_Page
             // 
