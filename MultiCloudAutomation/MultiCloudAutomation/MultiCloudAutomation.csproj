@@ -178,6 +178,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Class\AWS\AWSInstance.cs" />
+    <Compile Include="Class\AZURE\AZUREInstance.cs" />
+    <Compile Include="Class\Cloud.cs" />
     <Compile Include="Class\Request.cs" />
     <Compile Include="Class\ResponseClass.cs" />
     <Compile Include="Data\AWS\createInstanceBody.cs" />
@@ -188,7 +191,6 @@
     <Compile Include="Data\AZURE\getVMSimpleBody.cs" />
     <Compile Include="Data\AZURE\LoginBody.cs" />
     <Compile Include="Data\DataGridViewVM.cs" />
-    <Compile Include="Data\Root.cs" />
     <Compile Include="Forms\AddInstance.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -302,5 +304,6 @@
   <ItemGroup>
     <None Include="Resources\Leave.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
