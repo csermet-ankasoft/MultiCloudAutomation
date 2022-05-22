@@ -12,5 +12,6 @@ namespace APIandSwagger.Azure
         public string InstanceType { get; set; }
         public string OSType { get; set; }
         public string PublicIP { get; set; }
+        public string VMID { get; set; }
     }
 }

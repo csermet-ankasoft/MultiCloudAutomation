@@ -9,6 +9,10 @@ namespace MultiCloudAutomation
 {
     class DataGridViewVM
     {
+        [DisplayName("Cloud Type")]
+        public string CloudType { get; set; }
+        [DisplayName("ID")]
+        public string VMID { get; set; }
         [DisplayName("Name")]
         public string InstanceName { get; set; }
         [DisplayName("State")]
@@ -19,5 +23,6 @@ namespace MultiCloudAutomation
         public string OSType { get; set; }
         [DisplayName("Public IP")]
         public string PublicIP { get; set; }
+
     }
 }

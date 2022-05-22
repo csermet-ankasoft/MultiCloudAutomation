@@ -41,9 +41,77 @@ namespace APIandSwagger.Azure
                 temp.OSType = virtualMachinesList[i].OSType.ToString();
                 temp.InstanceType = virtualMachinesList[i].Size.Value;
                 temp.PublicIP = virtualMachinesList[i].GetPrimaryPublicIPAddress().IPAddress;
+                temp.VMID = virtualMachinesList[i].VMId;
                 vmList.Add(temp);
             }
             return vmList;
+        }
+
+        public static bool StartInstance(Azure.IDBody vmid)
+        {
+            checkAzureCredential();
+            var virtualMachines = Credential.azure.VirtualMachines.List();
+            List<Microsoft.Azure.Management.Compute.Fluent.IVirtualMachine> virtualMachinesList = virtualMachines.ToList();
+            List<Azure.VMSimpleBody> vmList = new List<Azure.VMSimpleBody>();
+            for (int i = 0; i < virtualMachinesList.Count; i++)
+            {
+                if (virtualMachinesList[i].VMId == vmid.vmid)
+                {
+                    virtualMachinesList[i].Start();
+                    return true;
+                }
+            }
+            return false;
+        }
+        public static bool RestartInstance(Azure.IDBody vmid)
+        {
+            checkAzureCredential();
+            var virtualMachines = Credential.azure.VirtualMachines.List();
+            List<Microsoft.Azure.Management.Compute.Fluent.IVirtualMachine> virtualMachinesList = virtualMachines.ToList();
+            List<Azure.VMSimpleBody> vmList = new List<Azure.VMSimpleBody>();
+            for (int i = 0; i < virtualMachinesList.Count; i++)
+            {
+                if (virtualMachinesList[i].VMId == vmid.vmid)
+                {
+                    virtualMachinesList[i].Restart();
+                    return true;
+                }
+            }
+            return false;
+        }
+        
+        public static bool StopInstance(Azure.IDBody vmid)
+        {
+            checkAzureCredential();
+            var virtualMachines = Credential.azure.VirtualMachines.List();
+            List<Microsoft.Azure.Management.Compute.Fluent.IVirtualMachine> virtualMachinesList = virtualMachines.ToList();
+            List<Azure.VMSimpleBody> vmList = new List<Azure.VMSimpleBody>();
+            for (int i = 0; i < virtualMachinesList.Count; i++)
+            {
+                if (virtualMachinesList[i].VMId == vmid.vmid)
+                {
+                    virtualMachinesList[i].PowerOff();
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public static bool TerminateInstance(Azure.IDBody vmid)
+        {
+            checkAzureCredential();
+            var virtualMachines = Credential.azure.VirtualMachines.List();
+            List<Microsoft.Azure.Management.Compute.Fluent.IVirtualMachine> virtualMachinesList = virtualMachines.ToList();
+            List<Azure.VMSimpleBody> vmList = new List<Azure.VMSimpleBody>();
+            for (int i = 0; i < virtualMachinesList.Count; i++)
+            {
+                if (virtualMachinesList[i].VMId == vmid.vmid)
+                {
+                    virtualMachinesList[i].Deallocate();
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

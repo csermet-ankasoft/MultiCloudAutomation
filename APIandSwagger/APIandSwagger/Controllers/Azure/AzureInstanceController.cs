@@ -35,142 +35,79 @@ namespace APIandSwagger.Controllers.AWS
             }            
         }
 
-
-
-
-
-
-
-
-
-        //aws/instance/getAllInstance
         [HttpPost]
-        public IActionResult getAllInstance([FromBody] getAllInstanceBody body)
+        public IActionResult startInstance([FromBody] Azure.IDBody body)
         {
             try
             {
-                return Ok(Class.AWSInstance.getAllInstance(body).Result.Reservations);
-            }
-            catch (KeyNotFoundException)
-            {
-                return Unauthorized();
-            }
-            catch (Exception a)
-            {
-                return BadRequest(a.Message);
-            }
-
-        }
-
-        //aws/instance/getAllInstanceByFilter
-        [HttpPost]
-        public IActionResult getAllInstanceByFilter([FromBody] getAllInstanceByFilterBody body)
-        {
-            try
-            {
-                return Ok(Class.AWSInstance.getAllInstanceByFilter(body).Result.Reservations);
-            }
-            catch (KeyNotFoundException)
-            {
-                return Unauthorized();
-            }
-            catch (Exception a)
-            {
-                return BadRequest(a.Message);
-            }
-
-        }
-
-        //aws/instance/createInstance
-        [HttpPost]
-        public IActionResult createInstance([FromBody] createInstanceBody body)
-        {
-            try
-            {
-                var result = Class.AWSInstance.CreateInstance(body).Result;
-                return Created(result[0], result);
-            }
-            catch (KeyNotFoundException)
-            {
-                return Unauthorized();
-            }
-            catch (Exception a)
-            {
-                return BadRequest(a.Message);
-            }
-        }
-
-        [HttpPost]
-        public IActionResult stopInstance([FromBody] InstanceIDListBody body)
-        {
-            try
-            {
-                var result = Class.AWSInstance.StopInstance(body).Result;
+                var result = Azure.Instance.StartInstance(body);
                 return Ok(result);
             }
             catch (KeyNotFoundException)
             {
                 return Unauthorized();
             }
-            catch (Exception a)
+            catch (Exception exception)
             {
-                return BadRequest(a.Message);
+                return BadRequest(exception.Message);
             }
         }
 
         [HttpPost]
-        public IActionResult startInstance([FromBody] InstanceIDListBody body)
+        public IActionResult restartInstance([FromBody] Azure.IDBody body)
         {
             try
             {
-                var result = Class.AWSInstance.StartInstance(body).Result;
+                var result = Azure.Instance.RestartInstance(body);
                 return Ok(result);
             }
             catch (KeyNotFoundException)
             {
                 return Unauthorized();
             }
-            catch (Exception a)
+            catch (Exception exception)
             {
-                return BadRequest(a.Message);
+                return BadRequest(exception.Message);
             }
         }
 
         [HttpPost]
-        public IActionResult rebootInstance([FromBody] InstanceIDListBody body)
+        public IActionResult stopInstance([FromBody] Azure.IDBody body)
         {
             try
             {
-                var result = Class.AWSInstance.RebootInstance(body).Result;
+                var result = Azure.Instance.StopInstance(body);
                 return Ok(result);
             }
             catch (KeyNotFoundException)
             {
                 return Unauthorized();
             }
-            catch (Exception a)
+            catch (Exception exception)
             {
-                return BadRequest(a.Message);
+                return BadRequest(exception.Message);
             }
         }
 
         [HttpPost]
-        public IActionResult terminateInstance([FromBody] InstanceIDListBody body)
+        public IActionResult TerminateInstance([FromBody] Azure.IDBody body)
         {
             try
             {
-                var result = Class.AWSInstance.TerminateInstance(body).Result;
+                var result = Azure.Instance.TerminateInstance(body);
                 return Ok(result);
             }
             catch (KeyNotFoundException)
             {
                 return Unauthorized();
             }
-            catch (Exception a)
+            catch (Exception exception)
             {
-                return BadRequest(a.Message);
+                return BadRequest(exception.Message);
             }
         }
+
+
 
 
     }

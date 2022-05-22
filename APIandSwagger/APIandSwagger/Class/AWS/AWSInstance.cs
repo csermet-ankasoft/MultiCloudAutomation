@@ -139,29 +139,6 @@ namespace APIandSwagger.Class
             return ec2Client.DescribeInstancesAsync(describeInstancesRequest, cancellationToken);
         }
 
-
-        /*
-        public static Task<DescribeImagesResponse> getAllImage(getAllInstanceBody body)
-        {
-            checkAWSKey();
-            var awsKey = new Amazon.Runtime.BasicAWSCredentials(AWSKey.accessKey, AWSKey.secretKey);
-            RegionEndpoint regionEndpoint = RegionEndpoint.GetBySystemName(body.region);
-            AmazonEC2Client ec2Client = new AmazonEC2Client(awsKey, regionEndpoint);
-            CancellationToken cancellationToken;
-            DescribeImagesRequest describeInstancesRequest = new DescribeImagesRequest();
-            List<string> test = new List<string>();
-            List<string> test2 = new List<string>();
-            test.Add("x86_64");
-            test2.Add("Linux");
-            describeInstancesRequest.Filters.Add(new Filter("architecture", test));
-            describeInstancesRequest.Filters.Add(new Filter("platform", test2));
-
-            var response = ec2Client.DescribeImagesAsync(describeInstancesRequest,cancellationToken);
-            return response;
-        }
-        */
-
-
         public static Task<DescribeInstancesResponse> getAllInstanceByFilter(getAllInstanceByFilterBody body)
         {
             checkAWSKey();

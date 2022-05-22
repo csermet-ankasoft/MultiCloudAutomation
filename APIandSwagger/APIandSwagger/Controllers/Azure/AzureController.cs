@@ -22,10 +22,14 @@ namespace APIandSwagger.Controllers.AWS
         }
 
         [HttpGet]
-        public IEnumerable<Microsoft.Azure.Management.ResourceManager.Fluent.IResourceGroup> resourceGroupGet()
+        public IActionResult resourceGroupGet()
         {
+            if (Credential.clientId == "" || Credential.azure == null)
+            {
+                return Unauthorized();
+            }
             var resourceGroups = Credential.azure.ResourceGroups.List();
-            return resourceGroups;
+            return Ok(resourceGroups);
         }
     }
 

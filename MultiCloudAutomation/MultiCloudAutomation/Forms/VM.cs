@@ -36,7 +36,7 @@ namespace MultiCloudAutomation
             this.Show();
         }
 
-        //Beginning Variables
+        //Başlangıç Variables
         ResponseClass task;
         List<DataGridViewVM> instanceDataGridViewList;
         int selectedColumnIndex = 0;
@@ -51,7 +51,7 @@ namespace MultiCloudAutomation
             timer1.Start();
         }
 
-        private async void timer1_Tick(object sender, EventArgs e)
+        private void timer1_Tick(object sender, EventArgs e)
         {
             try
             {
@@ -63,7 +63,7 @@ namespace MultiCloudAutomation
             }            
         }
 
-        private async void refresh_Click(object sender, EventArgs e)
+        private void refresh_Click(object sender, EventArgs e)
         {
             labelHTTPAWS.Text = "AWS HTTP: Waiting...";
             labelHTTPAZURE.Text = "AZURE HTTP: Waiting...";
@@ -81,22 +81,53 @@ namespace MultiCloudAutomation
         
         private async void startInstance_Click(object sender, EventArgs e)
         {
-                await startInstance();
+            if (dataGridView1.Rows[selectedColumnIndex].Cells[0].Value.ToString() == "AZURE")
+            {
+
+            }
+            else if(dataGridView1.Rows[selectedColumnIndex].Cells[0].Value.ToString() == "AWS")
+            {
+                await AWSstartInstance();
+            }
+                
         }
 
         private async void stopInstance_Click(object sender, EventArgs e)
-        {
-            await stopInstance();
+        {            
+            if (dataGridView1.Rows[selectedColumnIndex].Cells[0].Value.ToString() == "AZURE")
+            {
+
+            }
+            else if (dataGridView1.Rows[selectedColumnIndex].Cells[0].Value.ToString() == "AWS")
+            {
+                await AWSstopInstance();
+            }
         }
 
         private async void buttonTerminate_Click(object sender, EventArgs e)
         {
-            await terminateInstance();
+            if (dataGridView1.Rows[selectedColumnIndex].Cells[0].Value.ToString() == "AZURE")
+            {
+
+            }
+            else if (dataGridView1.Rows[selectedColumnIndex].Cells[0].Value.ToString() == "AWS")
+            {
+                await AWSterminateInstance();
+            }
+            
         }
 
         private async void buttonReboot_Click(object sender, EventArgs e)
         {
-            await rebootInstance();
+            
+            if (dataGridView1.Rows[selectedColumnIndex].Cells[0].Value.ToString() == "AZURE")
+            {
+
+            }
+            else if (dataGridView1.Rows[selectedColumnIndex].Cells[0].Value.ToString() == "AWS")
+            {
+                await AWSrebootInstance();
+            }
         }
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
@@ -156,6 +187,7 @@ namespace MultiCloudAutomation
             foreach (var item in json_data)
             {
                 DataGridViewVM instance = new DataGridViewVM();
+                instance.CloudType = "AWS";
                 instance.InstanceName = "";
                 foreach (var tag in item["instances"][0]["tags"])
                 {
@@ -165,6 +197,7 @@ namespace MultiCloudAutomation
                         break;
                     }
                 }                
+                instance.VMID = item["instances"][0]["instanceId"].ToString();
                 instance.InstanceState = item["instances"][0]["state"]["name"]["value"].ToString();
                 instance.InstanceType = item["instances"][0]["instanceType"]["value"].ToString();
                 instance.OSType = item["instances"][0]["platformDetails"].ToString();
@@ -186,6 +219,8 @@ namespace MultiCloudAutomation
             foreach (var item in json_data)
             {
                 DataGridViewVM instance = new DataGridViewVM();
+                instance.CloudType = "AZURE";
+                instance.VMID = item["vmid"].ToString();
                 instance.InstanceName = item["instanceName"].ToString();
                 instance.InstanceState = item["instanceState"].ToString();
                 instance.InstanceType = item["instanceType"].ToString();
@@ -195,10 +230,10 @@ namespace MultiCloudAutomation
             }
         }
 
-        public async Task<ResponseClass> startInstance()
+        public async Task<ResponseClass> AWSstartInstance()
         {
             List<string> templist = new List<string>();
-            templist.Add(dataGridView1.Rows[selectedColumnIndex].Cells[0].Value.ToString());
+            templist.Add(dataGridView1.Rows[selectedColumnIndex].Cells[1].Value.ToString());
             AWS.InstanceIDListBody loginbody = new AWS.InstanceIDListBody(templist, region);
             string jsonbody = JsonConvert.SerializeObject(loginbody);
             task = await Request.PostRequestAsync("aws/instance/startInstance", jsonbody);
@@ -207,10 +242,10 @@ namespace MultiCloudAutomation
             return task;
         }
 
-        public async Task<ResponseClass> stopInstance()
+        public async Task<ResponseClass> AWSstopInstance()
         {
             List<string> templist = new List<string>();
-            templist.Add(dataGridView1.Rows[selectedColumnIndex].Cells[0].Value.ToString());
+            templist.Add(dataGridView1.Rows[selectedColumnIndex].Cells[1].Value.ToString());
             AWS.InstanceIDListBody loginbody = new AWS.InstanceIDListBody(templist, region);
             string jsonbody = JsonConvert.SerializeObject(loginbody);
             task = await Request.PostRequestAsync("aws/instance/stopInstance", jsonbody);
@@ -218,10 +253,10 @@ namespace MultiCloudAutomation
             return task;
         }
 
-        public async Task<ResponseClass> rebootInstance()
+        public async Task<ResponseClass> AWSrebootInstance()
         {
             List<string> templist = new List<string>();
-            templist.Add(dataGridView1.Rows[selectedColumnIndex].Cells[0].Value.ToString());
+            templist.Add(dataGridView1.Rows[selectedColumnIndex].Cells[1].Value.ToString());
             AWS.InstanceIDListBody loginbody = new AWS.InstanceIDListBody(templist, region);
             string jsonbody = JsonConvert.SerializeObject(loginbody);
             task = await Request.PostRequestAsync("aws/instance/rebootInstance", jsonbody);
@@ -229,10 +264,10 @@ namespace MultiCloudAutomation
             return task;
         }
 
-        public async Task<ResponseClass> terminateInstance()
+        public async Task<ResponseClass> AWSterminateInstance()
         {
             List<string> templist = new List<string>();
-            templist.Add(dataGridView1.Rows[selectedColumnIndex].Cells[0].Value.ToString());
+            templist.Add(dataGridView1.Rows[selectedColumnIndex].Cells[1].Value.ToString());
             AWS.InstanceIDListBody loginbody = new AWS.InstanceIDListBody(templist, region);
             string jsonbody = JsonConvert.SerializeObject(loginbody);
             task = await Request.PostRequestAsync("aws/instance/terminateInstance", jsonbody);
@@ -255,6 +290,11 @@ namespace MultiCloudAutomation
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("" + dataGridView1.Rows[selectedColumnIndex].Cells[1].Value.ToString());
         }
     }
 }
