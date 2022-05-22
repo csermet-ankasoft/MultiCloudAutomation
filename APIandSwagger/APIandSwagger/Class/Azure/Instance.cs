@@ -107,11 +107,28 @@ namespace APIandSwagger.Azure
             {
                 if (virtualMachinesList[i].VMId == vmid.vmid)
                 {
-                    virtualMachinesList[i].Deallocate();
+                    Credential.azure.VirtualMachines.DeleteById(virtualMachinesList[i].Id);
                     return true;
                 }
             }
-            return false;
+            return true;
+        }
+
+        public static bool createInstance(Azure.IDBody vmid)
+        {
+            checkAzureCredential();
+            var virtualMachines = Credential.azure.VirtualMachines.List();
+            List<Microsoft.Azure.Management.Compute.Fluent.IVirtualMachine> virtualMachinesList = virtualMachines.ToList();
+            List<Azure.VMSimpleBody> vmList = new List<Azure.VMSimpleBody>();
+            for (int i = 0; i < virtualMachinesList.Count; i++)
+            {
+                if (virtualMachinesList[i].VMId == vmid.vmid)
+                {
+                    Credential.azure.VirtualMachines.DeleteById(virtualMachinesList[i].Id);
+                    return true;
+                }
+            }
+            return true;
         }
     }
 }

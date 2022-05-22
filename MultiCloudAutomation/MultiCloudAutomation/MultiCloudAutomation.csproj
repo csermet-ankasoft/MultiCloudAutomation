@@ -189,6 +189,7 @@
     <Compile Include="Data\AWS\InstanceIDListBody.cs" />
     <Compile Include="Data\AWS\LoginBody.cs" />
     <Compile Include="Data\AZURE\getVMSimpleBody.cs" />
+    <Compile Include="Data\AZURE\IDBody.cs" />
     <Compile Include="Data\AZURE\LoginBody.cs" />
     <Compile Include="Data\DataGridViewVM.cs" />
     <Compile Include="Forms\AddInstance.cs">
@@ -202,6 +203,12 @@
     </Compile>
     <Compile Include="Forms\AWS_CREDENTIAL.Designer.cs">
       <DependentUpon>AWS_CREDENTIAL.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\AzureAddInstance.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AzureAddInstance.Designer.cs">
+      <DependentUpon>AzureAddInstance.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\AZURE_CREDENTIAL.cs">
       <SubType>Form</SubType>
@@ -228,6 +235,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\AWS_CREDENTIAL.resx">
       <DependentUpon>AWS_CREDENTIAL.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AzureAddInstance.resx">
+      <DependentUpon>AzureAddInstance.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\AZURE_CREDENTIAL.resx">
       <DependentUpon>AZURE_CREDENTIAL.cs</DependentUpon>

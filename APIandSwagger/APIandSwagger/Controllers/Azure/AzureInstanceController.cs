@@ -90,7 +90,7 @@ namespace APIandSwagger.Controllers.AWS
         }
 
         [HttpPost]
-        public IActionResult TerminateInstance([FromBody] Azure.IDBody body)
+        public IActionResult terminateInstance([FromBody] Azure.IDBody body)
         {
             try
             {

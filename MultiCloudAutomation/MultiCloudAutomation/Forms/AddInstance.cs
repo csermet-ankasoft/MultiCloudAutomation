@@ -77,15 +77,6 @@ namespace MultiCloudAutomation
             
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            //MessageBox.Show(regionEndpointList[comboBoxRegion.SelectedIndex]);
-            
-            
-            
-            //MessageBox.Show(InstanceType.G22xlarge);
-        }
-
         public string regionNameToValueFinder(string regionName)
         {
             for (int i = 0; i < regionName.ToString().Length - 2; i++)
@@ -131,6 +122,11 @@ namespace MultiCloudAutomation
         }
 
         private void AddInstance_FormClosed(object sender, FormClosedEventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
         {
 
         }

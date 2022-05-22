@@ -15,6 +15,11 @@ namespace MultiCloudAutomation.AZUREInstance
         public static int selectedColumnIndex = 0;
         public static string region = "us-east-1";
 
+        public async Task<ResponseClass> AZUREAllInstance()
+        {
+            task = await Request.GetRequestAsync("azure/getVMSimple");
+            return task;
+        }
 
         public async Task<string> AZUREDGVListAdd()
         {
@@ -27,11 +32,7 @@ namespace MultiCloudAutomation.AZUREInstance
             return instances.StatusCode.ToString();
         }
 
-        public async Task<ResponseClass> AZUREAllInstance()
-        {
-            task = await Request.GetRequestAsync("azure/getVMSimple");
-            return task;
-        }
+        
 
         public void AZUREinstance_To_DataGridViewVMList(ResponseClass instances)
         {
@@ -49,6 +50,35 @@ namespace MultiCloudAutomation.AZUREInstance
                 instance.PublicIP = item["publicIP"].ToString();
                 Cloud.instanceDataGridViewList.Add(instance);
             }
+        }
+
+        public async Task<ResponseClass> AZUREInstanceStart(string id)
+        {
+            AZURE.IDBody body = new AZURE.IDBody(id);
+            string jsonbody = JsonConvert.SerializeObject(body);
+            task = await Request.PostRequestAsync("azure/startInstance",jsonbody);
+            return task;
+        }
+        public async Task<ResponseClass> AZUREInstanceStop(string id)
+        {
+            AZURE.IDBody body = new AZURE.IDBody(id);
+            string jsonbody = JsonConvert.SerializeObject(body);
+            task = await Request.PostRequestAsync("azure/stopInstance", jsonbody);
+            return task;
+        }
+        public async Task<ResponseClass> AZUREInstanceRestart(string id)
+        {
+            AZURE.IDBody body = new AZURE.IDBody(id);
+            string jsonbody = JsonConvert.SerializeObject(body);
+            task = await Request.PostRequestAsync("azure/restartInstance", jsonbody);
+            return task;
+        }
+        public async Task<ResponseClass> AZUREInstanceTerminate(string id)
+        {
+            AZURE.IDBody body = new AZURE.IDBody(id);
+            string jsonbody = JsonConvert.SerializeObject(body);
+            task = await Request.PostRequestAsync("azure/terminateInstance", jsonbody);
+            return task;
         }
     }
 }

@@ -71,17 +71,29 @@ namespace MultiCloudAutomation
             AddInstance addInstanceForm = new AddInstance();
             addInstanceForm.Show();
             addInstanceForm.FormClosing += newFormClossing;
-        }   
-        
+        }
+
+        private void buttonCreateInstanceAzure_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Forms.AzureAddInstance addInstanceForm = new  Forms.AzureAddInstance();
+            addInstanceForm.Show();
+            addInstanceForm.FormClosing += newFormClossing;
+        }
+
         private async void startInstance_Click(object sender, EventArgs e)
         {
             if (dataGridView1.Rows[AWSInstance.Instance.selectedColumnIndex].Cells[0].Value.ToString() == "AZURE")
             {
-
+                labelHTTPAZURE.Text = "AZURE HTTP: Starting...";
+                var responseinstance = await AZUREinstanceCode.AZUREInstanceStart(dataGridView1.Rows[AWSInstance.Instance.selectedColumnIndex].Cells[1].Value.ToString());
+                labelHTTPAZURE.Text = "AZURE HTTP: " + responseinstance.StatusCode;
             }
             else if(dataGridView1.Rows[AWSInstance.Instance.selectedColumnIndex].Cells[0].Value.ToString() == "AWS")
             {
-                await AWSinstanceCode.AWSstartInstance();
+                labelHTTPAWS.Text = "AWS HTTP: Starting...";
+                var responseinstance= await AWSinstanceCode.AWSstartInstance();
+                labelHTTPAWS.Text = "AWS HTTP: " + responseinstance.StatusCode;
             }
                 
         }
@@ -90,11 +102,16 @@ namespace MultiCloudAutomation
         {            
             if (dataGridView1.Rows[AWSInstance.Instance.selectedColumnIndex].Cells[0].Value.ToString() == "AZURE")
             {
+                labelHTTPAZURE.Text = "AZURE HTTP: Stopping...";
+                var responseinstance = await AZUREinstanceCode.AZUREInstanceStop(dataGridView1.Rows[AWSInstance.Instance.selectedColumnIndex].Cells[1].Value.ToString());
+                labelHTTPAZURE.Text = "AZURE HTTP: " + responseinstance.StatusCode;
 
             }
             else if (dataGridView1.Rows[AWSInstance.Instance.selectedColumnIndex].Cells[0].Value.ToString() == "AWS")
             {
-                await AWSinstanceCode.AWSstopInstance();
+                labelHTTPAWS.Text = "AWS HTTP: Stopping...";
+                var responseinstance = await AWSinstanceCode.AWSstopInstance();
+                labelHTTPAWS.Text = "AWS HTTP: " + responseinstance.StatusCode;
             }
         }
 
@@ -102,11 +119,15 @@ namespace MultiCloudAutomation
         {
             if (dataGridView1.Rows[AWSInstance.Instance.selectedColumnIndex].Cells[0].Value.ToString() == "AZURE")
             {
-
+                labelHTTPAZURE.Text = "AZURE HTTP: Terminating...";
+                var responseinstance = await AZUREinstanceCode.AZUREInstanceTerminate(dataGridView1.Rows[AWSInstance.Instance.selectedColumnIndex].Cells[1].Value.ToString());
+                labelHTTPAZURE.Text = "AZURE HTTP: " + responseinstance.StatusCode;
             }
             else if (dataGridView1.Rows[AWSInstance.Instance.selectedColumnIndex].Cells[0].Value.ToString() == "AWS")
             {
-                await AWSinstanceCode.AWSterminateInstance();
+                labelHTTPAWS.Text = "AWS HTTP: Terminating...";
+                var responseinstance = await AWSinstanceCode.AWSterminateInstance();
+                labelHTTPAWS.Text = "AWS HTTP: " + responseinstance.StatusCode;
             }
             
         }
@@ -116,11 +137,15 @@ namespace MultiCloudAutomation
             
             if (dataGridView1.Rows[AWSInstance.Instance.selectedColumnIndex].Cells[0].Value.ToString() == "AZURE")
             {
-
+                labelHTTPAZURE.Text = "AZURE HTTP: Rebooting...";
+                var responseinstance = await AZUREinstanceCode.AZUREInstanceRestart(dataGridView1.Rows[AWSInstance.Instance.selectedColumnIndex].Cells[1].Value.ToString());
+                labelHTTPAZURE.Text = "AZURE HTTP: " + responseinstance.StatusCode;
             }
             else if (dataGridView1.Rows[AWSInstance.Instance.selectedColumnIndex].Cells[0].Value.ToString() == "AWS")
             {
-                await AWSinstanceCode.AWSrebootInstance();
+                labelHTTPAWS.Text = "AWS HTTP: Rebooting...";
+                var responseinstance = await AWSinstanceCode.AWSrebootInstance();
+                labelHTTPAWS.Text = "AWS HTTP: " + responseinstance.StatusCode;
             }
         }
 
@@ -135,16 +160,21 @@ namespace MultiCloudAutomation
                 buttonStop.Enabled = true;                
             }
 
-        }     
-
+        }
+        bool isRefreshing = false;
         public async void dataGridViewRefresh()
         {
-            Cloud.instanceDataGridViewList = new List<DataGridViewVM>();
-            string AWSstatuscode = await AWSinstanceCode.AWSDGVListAdd();
-            labelHTTPAWS.Text = "AWS HTTP: " + AWSstatuscode;
-            string AZUREstatuscode = await AZUREinstanceCode.AZUREDGVListAdd();
-            labelHTTPAZURE.Text = "AZURE HTTP: " + AZUREstatuscode;
-            dataGridView1.DataSource = Cloud.instanceDataGridViewList.ToList();
+            if (isRefreshing == false)
+            {
+                isRefreshing = true;
+                Cloud.instanceDataGridViewList = new List<DataGridViewVM>();
+                string AWSresponseinstance = await AWSinstanceCode.AWSDGVListAdd();
+                labelHTTPAWS.Text = "AWS HTTP: " + AWSresponseinstance;
+                string AZUREresponseinstance = await AZUREinstanceCode.AZUREDGVListAdd();
+                labelHTTPAZURE.Text = "AZURE HTTP: " + AZUREresponseinstance;
+                dataGridView1.DataSource = Cloud.instanceDataGridViewList.ToList();
+                isRefreshing = false;
+            }            
         }
     }
 }
