@@ -36,6 +36,24 @@ namespace APIandSwagger.Controllers.AWS
         }
 
         [HttpPost]
+        public IActionResult createInstance([FromBody] Azure.CreateInstanceBody body)
+        {
+            try
+            {
+                var result = Azure.Instance.createInstance(body);
+                return Ok(result);
+            }
+            catch (KeyNotFoundException)
+            {
+                return Unauthorized();
+            }
+            catch (Exception exception)
+            {
+                return BadRequest(exception.Message);
+            }
+        }
+
+        [HttpPost]
         public IActionResult startInstance([FromBody] Azure.IDBody body)
         {
             try

@@ -13,7 +13,6 @@ namespace MultiCloudAutomation.AZUREInstance
     {
         ResponseClass task;
         public static int selectedColumnIndex = 0;
-        public static string region = "us-east-1";
 
         public async Task<ResponseClass> AZUREAllInstance()
         {
