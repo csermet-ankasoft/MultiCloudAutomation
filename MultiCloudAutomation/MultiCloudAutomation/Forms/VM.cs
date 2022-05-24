@@ -117,18 +117,23 @@ namespace MultiCloudAutomation
 
         private async void buttonTerminate_Click(object sender, EventArgs e)
         {
-            if (dataGridView1.Rows[AWSInstance.Instance.selectedColumnIndex].Cells[0].Value.ToString() == "AZURE")
+            DialogResult messageboxresult = MessageBox.Show(dataGridView1.Rows[AWSInstance.Instance.selectedColumnIndex].Cells[1].Value.ToString() + " Silmek istediğinize emin misiniz","Uyarı",MessageBoxButtons.YesNo);
+            if (messageboxresult.ToString() == "Yes" )
             {
-                labelHTTPAZURE.Text = "AZURE HTTP: Terminating...";
-                var responseinstance = await AZUREinstanceCode.AZUREInstanceTerminate(dataGridView1.Rows[AWSInstance.Instance.selectedColumnIndex].Cells[1].Value.ToString());
-                labelHTTPAZURE.Text = "AZURE HTTP: " + responseinstance.StatusCode;
+                if (dataGridView1.Rows[AWSInstance.Instance.selectedColumnIndex].Cells[0].Value.ToString() == "AZURE")
+                {
+                    labelHTTPAZURE.Text = "AZURE HTTP: Terminating...";
+                    var responseinstance = await AZUREinstanceCode.AZUREInstanceTerminate(dataGridView1.Rows[AWSInstance.Instance.selectedColumnIndex].Cells[1].Value.ToString());
+                    labelHTTPAZURE.Text = "AZURE HTTP: " + responseinstance.StatusCode;
+                }
+                else if (dataGridView1.Rows[AWSInstance.Instance.selectedColumnIndex].Cells[0].Value.ToString() == "AWS")
+                {
+                    labelHTTPAWS.Text = "AWS HTTP: Terminating...";
+                    var responseinstance = await AWSinstanceCode.AWSterminateInstance();
+                    labelHTTPAWS.Text = "AWS HTTP: " + responseinstance.StatusCode;
+                }
             }
-            else if (dataGridView1.Rows[AWSInstance.Instance.selectedColumnIndex].Cells[0].Value.ToString() == "AWS")
-            {
-                labelHTTPAWS.Text = "AWS HTTP: Terminating...";
-                var responseinstance = await AWSinstanceCode.AWSterminateInstance();
-                labelHTTPAWS.Text = "AWS HTTP: " + responseinstance.StatusCode;
-            }
+            
             
         }
 

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AzureAddInstance));
             this.comboBoxRegion = new System.Windows.Forms.ComboBox();
             this.comboBoxResourceGroup = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -99,6 +100,7 @@
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.DarkTurquoise;
+            this.button1.FlatAppearance.BorderSize = 2;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.Location = new System.Drawing.Point(254, 333);
@@ -224,11 +226,11 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(5, 229);
+            this.label4.Location = new System.Drawing.Point(27, 229);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(140, 20);
+            this.label4.Size = new System.Drawing.Size(116, 20);
             this.label4.TabIndex = 10;
-            this.label4.Text = "Admin Username :";
+            this.label4.Text = "PC Username :";
             // 
             // textBoxadminpass
             // 
@@ -242,11 +244,11 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(9, 261);
+            this.label10.Location = new System.Drawing.Point(32, 261);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(135, 20);
+            this.label10.Size = new System.Drawing.Size(111, 20);
             this.label10.TabIndex = 10;
-            this.label10.Text = "Admin Password :";
+            this.label10.Text = "PC Password :";
             // 
             // AzureAddInstance
             // 
@@ -273,6 +275,10 @@
             this.Controls.Add(this.textBoxadminpass);
             this.Controls.Add(this.textBoxadminusername);
             this.Controls.Add(this.textBoxComputerName);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "AzureAddInstance";
             this.Text = "AzureAddInstance";
             this.Load += new System.EventHandler(this.AzureAddInstance_Load);

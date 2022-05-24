@@ -169,24 +169,40 @@ namespace APIandSwagger.Azure
 
             try
             {
-                //Microsoft.Azure.Management.Network.Fluent.INetwork              network     = createNetwork(body.networkName, body.region, body.resourceGroup, body.subnetName);
-                //Microsoft.Azure.Management.Network.Fluent.IPublicIPAddress      PublicIP    = createPublicIP(body.publicIP, body.region, body.resourceGroup);
-                //Microsoft.Azure.Management.Network.Fluent.INetworkSecurityGroup NSG         = createNSG(body.nsgName, body.region, body.resourceGroup);
-                //Microsoft.Azure.Management.Network.Fluent.INetworkInterface     nic         = createNic(body.nicName, body.region, body.resourceGroup, body.subnetName, network, PublicIP, NSG);
                 var nic = networkInterfaceFind(body.nicName);
-                
-                var createdVirtualMachine = Credential.azure.VirtualMachines
+                if (body.osType == "Linux")
+                {
+                    var createdVirtualMachine = Credential.azure.VirtualMachines
                     .Define(body.vmName)
                     .WithRegion(body.region)
                     .WithExistingResourceGroup(body.resourceGroup)
                     .WithExistingPrimaryNetworkInterface(nic)
-                    .WithLatestWindowsImage(body.imagepublisher,body.imageoffer, body.imagesku)
-                    //.WithLatestLinuxImage().WithRootUsername().WithRootPassword()
+                    .WithLatestLinuxImage(body.imagepublisher, body.imageoffer, body.imagesku).WithRootUsername(body.adminUsername).WithRootPassword(body.adminpass)
+                    .WithComputerName(body.computerName)
+                    .WithSize(body.size).Create();
+                    return "Created";
+                }
+                else if (body.osType == "Windows")
+                {
+                    var createdVirtualMachine = Credential.azure.VirtualMachines
+                    .Define(body.vmName)
+                    .WithRegion(body.region)
+                    .WithExistingResourceGroup(body.resourceGroup)
+                    .WithExistingPrimaryNetworkInterface(nic)
+                    .WithLatestWindowsImage(body.imagepublisher, body.imageoffer, body.imagesku)
                     .WithAdminUsername(body.adminUsername)
                     .WithAdminPassword(body.adminpass)
                     .WithComputerName(body.computerName)
                     .WithSize(body.size).Create();
-                return "Created";
+                    return "Created";
+                }
+                else
+                {
+                    return "?";
+                }
+                
+                
+                
             }
             catch (Exception exception)
             {

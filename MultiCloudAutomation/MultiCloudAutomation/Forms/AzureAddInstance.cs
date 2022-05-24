@@ -43,47 +43,7 @@ namespace MultiCloudAutomation.Forms
                 comboBoxResourceGroup.Items.Add(item["name"].ToString());
             }
         }
-        /*
-        public async void NetworkAddComboBox(string resourceGroup)
-        {
-            comboBoxNetwork.Items.Clear();
-            AZURE.NameByResourceGroupBody body = new AZURE.NameByResourceGroupBody(resourceGroup);
-            string jsonbody = JsonConvert.SerializeObject(body);
-            var response = await Request.PostRequestAsync("azure/networknames", jsonbody);
-            JArray json_data = (JArray)JsonConvert.DeserializeObject(response.Content);
-            foreach (var item in json_data)
-            {
-                comboBoxNetwork.Items.Add(item);
-            }
-        }
 
-        public async void networkSecurityGroupnamesAddComboBox(string resourceGroup)
-        {
-            comboBoxnsg.Items.Clear();
-            AZURE.NameByResourceGroupBody body = new AZURE.NameByResourceGroupBody(resourceGroup);
-            string jsonbody = JsonConvert.SerializeObject(body);
-            var response = await Request.PostRequestAsync("azure/networkSecurityGroupnames", jsonbody);
-            JArray json_data = (JArray)JsonConvert.DeserializeObject(response.Content);
-            foreach (var item in json_data)
-            {
-                comboBoxnsg.Items.Add(item);
-            }
-        }
-
-
-        public async void publicIPAddComboBox(string resourceGroup)
-        {
-            comboBoxPublicIP.Items.Clear();
-            AZURE.NameByResourceGroupBody body = new AZURE.NameByResourceGroupBody(resourceGroup);
-            string jsonbody = JsonConvert.SerializeObject(body);
-            var response = await Request.PostRequestAsync("azure/publicIPAddressnames", jsonbody);
-            JArray json_data = (JArray)JsonConvert.DeserializeObject(response.Content);
-            foreach (var item in json_data)
-            {
-                comboBoxPublicIP.Items.Add(item);
-            }
-        }
-        */
         public async void networkInterfacenamesAddComboBox(string resourceGroup)
         {
             comboBoxnic.Items.Clear();
@@ -99,9 +59,20 @@ namespace MultiCloudAutomation.Forms
 
         public async Task<string> createInstance()
         {
-            AZURE.AddInstancebody body = new AZURE.AddInstancebody(textBoxVMName.Text,comboBoxResourceGroup.Text, comboBoxRegion.Text,textBoxComputerName.Text
-                , "Standard_B1s" ,comboBoxOsType.Text, "MicrosoftWindowsServer", "WindowsServer", "2012-R2-Datacenter"
-                ,comboBoxnic.Text, textBoxadminusername.Text, textBoxadminpass.Text);
+            AZURE.AddInstancebody body = null;
+            if (comboBoxOsType.Text == "Linux")
+            {
+                body = new AZURE.AddInstancebody(textBoxVMName.Text, comboBoxResourceGroup.Text, comboBoxRegion.Text, textBoxComputerName.Text
+                , "Standard_B1s", comboBoxOsType.Text, "OpenLogic", "CentOS", "7.3"
+                , comboBoxnic.Text, textBoxadminusername.Text, textBoxadminpass.Text);
+            }
+            else if (comboBoxOsType.Text == "Windows")
+            {
+                body = new AZURE.AddInstancebody(textBoxVMName.Text, comboBoxResourceGroup.Text, comboBoxRegion.Text, textBoxComputerName.Text
+                , "Standard_B1s", comboBoxOsType.Text, "MicrosoftWindowsServer", "WindowsServer", "2012-R2-Datacenter"
+                , comboBoxnic.Text, textBoxadminusername.Text, textBoxadminpass.Text);
+            }
+            
             string jsonbody = JsonConvert.SerializeObject(body);
             var response = await Request.PostRequestAsync("azure/createInstance", jsonbody);
             MessageBox.Show(response.Content);
@@ -118,10 +89,7 @@ namespace MultiCloudAutomation.Forms
 
         private void comboBoxResourceGroup_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //NetworkAddComboBox(comboBoxResourceGroup.Items[comboBoxResourceGroup.SelectedIndex].ToString());
             networkInterfacenamesAddComboBox(comboBoxResourceGroup.Items[comboBoxResourceGroup.SelectedIndex].ToString());
-            //publicIPAddComboBox(comboBoxResourceGroup.Items[comboBoxResourceGroup.SelectedIndex].ToString();
-            //networkSecurityGroupnamesAddComboBox(comboBoxResourceGroup.Items[comboBoxResourceGroup.SelectedIndex].ToString());
         }
     }
 }
