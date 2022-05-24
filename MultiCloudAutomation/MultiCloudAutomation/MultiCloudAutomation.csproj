@@ -188,9 +188,11 @@
     <Compile Include="Data\AWS\getAllInstanceByFilterBody.cs" />
     <Compile Include="Data\AWS\InstanceIDListBody.cs" />
     <Compile Include="Data\AWS\LoginBody.cs" />
+    <Compile Include="Data\AZURE\AddInstancebody.cs" />
     <Compile Include="Data\AZURE\getVMSimpleBody.cs" />
     <Compile Include="Data\AZURE\IDBody.cs" />
     <Compile Include="Data\AZURE\LoginBody.cs" />
+    <Compile Include="Data\AZURE\NameByResourceGroupBody.cs" />
     <Compile Include="Data\DataGridViewVM.cs" />
     <Compile Include="Forms\AddInstance.cs">
       <SubType>Form</SubType>

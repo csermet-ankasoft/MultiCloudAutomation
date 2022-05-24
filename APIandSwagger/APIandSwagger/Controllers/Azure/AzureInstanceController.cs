@@ -36,6 +36,80 @@ namespace APIandSwagger.Controllers.AWS
         }
 
         [HttpPost]
+        public IActionResult networknames([FromBody] Azure.NameByResourceGroupBody body)
+        {
+            try
+            {
+                var result = Azure.Instance.networknames(body);
+                return Ok(result);
+            }
+            catch (KeyNotFoundException)
+            {
+                return Unauthorized();
+            }
+            catch (Exception exception)
+            {
+                return BadRequest(exception.Message);
+            }
+        }
+
+        [HttpPost]
+        public IActionResult publicIPAddressnames([FromBody] Azure.NameByResourceGroupBody body)
+        {
+            try
+            {
+                var result = Azure.Instance.publicIPAddressnames(body);
+                return Ok(result);
+            }
+            catch (KeyNotFoundException)
+            {
+                return Unauthorized();
+            }
+            catch (Exception exception)
+            {
+                return BadRequest(exception.Message);
+            }
+        }
+
+        [HttpPost]
+        public IActionResult networkSecurityGroupnames([FromBody] Azure.NameByResourceGroupBody body)
+        {
+            try
+            {
+                var result = Azure.Instance.networkSecurityGroupnames(body);
+                return Ok(result);
+            }
+            catch (KeyNotFoundException)
+            {
+                return Unauthorized();
+            }
+            catch (Exception exception)
+            {
+                return BadRequest(exception.Message);
+            }
+        }
+
+        [HttpPost]
+        public IActionResult networkInterfacenames([FromBody] Azure.NameByResourceGroupBody body)
+        {
+            try
+            {
+                var result = Azure.Instance.networkInterfacenames(body);
+                return Ok(result);
+            }
+            catch (KeyNotFoundException)
+            {
+                return Unauthorized();
+            }
+            catch (Exception exception)
+            {
+                return BadRequest(exception.Message);
+            }
+        }
+
+
+
+        [HttpPost]
         public IActionResult createInstance([FromBody] Azure.CreateInstanceBody body)
         {
             try

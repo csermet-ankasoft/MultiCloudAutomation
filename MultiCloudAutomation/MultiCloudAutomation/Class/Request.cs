@@ -33,7 +33,8 @@ namespace MultiCloudAutomation
 
         public static async Task<ResponseClass> PostRequest(string url, string jsonbody)
         {
-            HttpClient client = HttpClientStandart();            
+            HttpClient client = HttpClientStandart();
+            client.Timeout = TimeSpan.FromMinutes(5);
             var httpContent = new StringContent(jsonbody, Encoding.UTF8, "application/json");
             using (HttpResponseMessage response = await client.PostAsync(url, httpContent))
             {

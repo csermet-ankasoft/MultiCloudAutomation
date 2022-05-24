@@ -37,57 +37,10 @@ namespace APIandSwagger.Controllers.AWS
         {
             if (!checkAzureCredential())
                 return Unauthorized();
-            var resourceGroups = Credential.azure.ResourceGroups.List();
+            var resourceGroups = Credential.azure.ResourceGroups.List().ToList();
             return Ok(resourceGroups);
         }
 
-        [HttpGet]
-        public IActionResult t()
-        {
-            if (!checkAzureCredential())
-                return Unauthorized();// Microsoft.Azure.Management.Compute.Fluent
-            var resourceGroups = Credential.azure.VirtualMachineImages.ListByRegion("australiaeast");
-            return Ok(resourceGroups);
-        }
-
-
-        /*
-        [HttpGet]
-        public IActionResult NetworksGet()
-        {
-            if (!checkAzureCredential())
-                return Unauthorized();
-            var resourceGroups = Credential.azure.Networks.List();
-            return Ok(resourceGroups);
-        }
-
-        [HttpGet]
-        public IActionResult PublicIPAddressesGet()
-        {
-            if (!checkAzureCredential())
-                return Unauthorized();
-            var resourceGroups = Credential.azure.PublicIPAddresses.List();
-            return Ok(resourceGroups);
-        }
-
-        [HttpGet]
-        public IActionResult NetworkSecurityGroupsGet()
-        {
-            if (!checkAzureCredential())
-                return Unauthorized();
-            var resourceGroups = Credential.azure.NetworkSecurityGroups.List();
-            return Ok(resourceGroups);
-        }
-
-        [HttpGet]
-        public IActionResult NetworkInterfacesGet()
-        {
-            if (!checkAzureCredential())
-                return Unauthorized();
-            var resourceGroups = Credential.azure.NetworkInterfaces.get("cloud-shell-storage-westeurope","test").Id;
-            return Ok(resourceGroups);
-        }
-        */
     }
 
 

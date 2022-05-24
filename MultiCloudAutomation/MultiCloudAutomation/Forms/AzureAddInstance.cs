@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -22,8 +23,8 @@ namespace MultiCloudAutomation.Forms
 
         private async void AzureAddInstance_Load(object sender, EventArgs e)
         {
-            var t = await ResourceGroupRequest();
-            ResourceGroup_toResponse(t);
+            var resourceGroupRequest = await ResourceGroupRequest();
+            ResourceGroupAddComboBox(resourceGroupRequest);
         }
 
         public async Task<ResponseClass> ResourceGroupRequest()
@@ -32,20 +33,95 @@ namespace MultiCloudAutomation.Forms
             return task;
         }
 
-        public void ResourceGroup_toResponse(ResponseClass instances)
+        public void ResourceGroupAddComboBox(ResponseClass instances)
         {
-            string jsonbody = JsonConvert.SerializeObject(instances);
-            JArray json_data = (JArray)JsonConvert.DeserializeObject(task.Content);
+            comboBoxResourceGroup.Items.Clear();
+            JArray json_data = (JArray)JsonConvert.DeserializeObject(instances.Content);
             foreach (var item in json_data)
             {
                 
                 comboBoxResourceGroup.Items.Add(item["name"].ToString());
             }
         }
-
-        private void button1_Click(object sender, EventArgs e)
+        /*
+        public async void NetworkAddComboBox(string resourceGroup)
         {
+            comboBoxNetwork.Items.Clear();
+            AZURE.NameByResourceGroupBody body = new AZURE.NameByResourceGroupBody(resourceGroup);
+            string jsonbody = JsonConvert.SerializeObject(body);
+            var response = await Request.PostRequestAsync("azure/networknames", jsonbody);
+            JArray json_data = (JArray)JsonConvert.DeserializeObject(response.Content);
+            foreach (var item in json_data)
+            {
+                comboBoxNetwork.Items.Add(item);
+            }
+        }
 
+        public async void networkSecurityGroupnamesAddComboBox(string resourceGroup)
+        {
+            comboBoxnsg.Items.Clear();
+            AZURE.NameByResourceGroupBody body = new AZURE.NameByResourceGroupBody(resourceGroup);
+            string jsonbody = JsonConvert.SerializeObject(body);
+            var response = await Request.PostRequestAsync("azure/networkSecurityGroupnames", jsonbody);
+            JArray json_data = (JArray)JsonConvert.DeserializeObject(response.Content);
+            foreach (var item in json_data)
+            {
+                comboBoxnsg.Items.Add(item);
+            }
+        }
+
+
+        public async void publicIPAddComboBox(string resourceGroup)
+        {
+            comboBoxPublicIP.Items.Clear();
+            AZURE.NameByResourceGroupBody body = new AZURE.NameByResourceGroupBody(resourceGroup);
+            string jsonbody = JsonConvert.SerializeObject(body);
+            var response = await Request.PostRequestAsync("azure/publicIPAddressnames", jsonbody);
+            JArray json_data = (JArray)JsonConvert.DeserializeObject(response.Content);
+            foreach (var item in json_data)
+            {
+                comboBoxPublicIP.Items.Add(item);
+            }
+        }
+        */
+        public async void networkInterfacenamesAddComboBox(string resourceGroup)
+        {
+            comboBoxnic.Items.Clear();
+            AZURE.NameByResourceGroupBody body = new AZURE.NameByResourceGroupBody(resourceGroup);
+            string jsonbody = JsonConvert.SerializeObject(body);
+            var response = await Request.PostRequestAsync("azure/networkInterfacenames", jsonbody);
+            JArray json_data = (JArray)JsonConvert.DeserializeObject(response.Content);
+            foreach (var item in json_data)
+            {
+                comboBoxnic.Items.Add(item);
+            }
+        }
+
+        public async Task<string> createInstance()
+        {
+            AZURE.AddInstancebody body = new AZURE.AddInstancebody(textBoxVMName.Text,comboBoxResourceGroup.Text, comboBoxRegion.Text,textBoxComputerName.Text
+                , "Standard_B1s" ,comboBoxOsType.Text, "MicrosoftWindowsServer", "WindowsServer", "2012-R2-Datacenter"
+                ,comboBoxnic.Text, textBoxadminusername.Text, textBoxadminpass.Text);
+            string jsonbody = JsonConvert.SerializeObject(body);
+            var response = await Request.PostRequestAsync("azure/createInstance", jsonbody);
+            MessageBox.Show(response.Content);
+            return response.Content;
+        }
+
+
+
+
+        private async void button1_Click(object sender, EventArgs e)
+        {
+            string response = await createInstance();
+        }
+
+        private void comboBoxResourceGroup_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //NetworkAddComboBox(comboBoxResourceGroup.Items[comboBoxResourceGroup.SelectedIndex].ToString());
+            networkInterfacenamesAddComboBox(comboBoxResourceGroup.Items[comboBoxResourceGroup.SelectedIndex].ToString());
+            //publicIPAddComboBox(comboBoxResourceGroup.Items[comboBoxResourceGroup.SelectedIndex].ToString();
+            //networkSecurityGroupnamesAddComboBox(comboBoxResourceGroup.Items[comboBoxResourceGroup.SelectedIndex].ToString());
         }
     }
 }

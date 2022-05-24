@@ -46,6 +46,122 @@ namespace APIandSwagger.Azure
             }
             return vmList;
         }
+        
+
+
+        public static List<string> networknames(Azure.NameByResourceGroupBody body)
+        {
+            try
+            {
+                List<Microsoft.Azure.Management.Network.Fluent.INetwork> network = Credential.azure.Networks.List().ToList();
+                List<string> networknames = new List<string>();
+                foreach (var item in network)
+                {
+                    if (item.ResourceGroupName == body.resourceGroup)
+                    {
+                        networknames.Add(item.Name);
+                    }
+                    
+                }
+                return networknames;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public static List<string> publicIPAddressnames(Azure.NameByResourceGroupBody body)
+        {
+            try
+            {
+                List<Microsoft.Azure.Management.Network.Fluent.IPublicIPAddress> publicIPAddress = Credential.azure.PublicIPAddresses.List().ToList();
+                List<string> publicIPAddressnames = new List<string>();
+                foreach (var item in publicIPAddress)
+                {
+                    if (item.ResourceGroupName == body.resourceGroup)
+                    {
+                        publicIPAddressnames.Add(item.Name);
+                    }
+
+                }
+                return publicIPAddressnames;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public static List<string> networkSecurityGroupnames(Azure.NameByResourceGroupBody body)
+        {
+            try
+            {
+                List<Microsoft.Azure.Management.Network.Fluent.INetworkSecurityGroup> networkSecurityGroup = Credential.azure.NetworkSecurityGroups.List().ToList();
+                List<string> networkSecurityGroupnames = new List<string>();
+                foreach (var item in networkSecurityGroup)
+                {
+                    if (item.ResourceGroupName == body.resourceGroup)
+                    {
+                        networkSecurityGroupnames.Add(item.Name);
+                    }
+
+                }
+                return networkSecurityGroupnames;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public static List<string> networkInterfacenames(Azure.NameByResourceGroupBody body)
+        {
+            try
+            {
+                List<Microsoft.Azure.Management.Network.Fluent.INetworkInterface> networkInterface = Credential.azure.NetworkInterfaces.List().ToList();
+                List<string> networkInterfacenames = new List<string>();
+                foreach (var item in networkInterface)
+                {
+                    if (item.ResourceGroupName == body.resourceGroup)
+                    {
+                        networkInterfacenames.Add(item.Name);
+                    }
+
+                }
+                return networkInterfacenames;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public static Microsoft.Azure.Management.Network.Fluent.INetworkInterface networkInterfaceFind(string nicName)
+        {
+            try
+            {
+                List<Microsoft.Azure.Management.Network.Fluent.INetworkInterface> networkInterface = Credential.azure.NetworkInterfaces.List().ToList();
+                List<string> networkInterfacenames = new List<string>();
+                foreach (var item in networkInterface)
+                {
+                    if (item.Name == nicName)
+                    {
+                        networkInterfacenames.Add(item.Name);
+                        return item;
+                    }
+                }
+                return null;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
+
+
 
         public static string createInstance(Azure.CreateInstanceBody body)
         {
@@ -53,23 +169,24 @@ namespace APIandSwagger.Azure
 
             try
             {
-                Microsoft.Azure.Management.Network.Fluent.INetwork              network     = createNetwork(body.networkName, body.region, body.resourceGroup, body.subnetName);
-                Microsoft.Azure.Management.Network.Fluent.IPublicIPAddress      PublicIP    = createPublicIP(body.publicIP, body.region, body.resourceGroup);
-                Microsoft.Azure.Management.Network.Fluent.INetworkSecurityGroup NSG         = createNSG(body.nsgName, body.region, body.resourceGroup);
-                Microsoft.Azure.Management.Network.Fluent.INetworkInterface     nic         = createNic(body.nicName, body.region, body.resourceGroup, body.subnetName, network, PublicIP, NSG);
-
+                //Microsoft.Azure.Management.Network.Fluent.INetwork              network     = createNetwork(body.networkName, body.region, body.resourceGroup, body.subnetName);
+                //Microsoft.Azure.Management.Network.Fluent.IPublicIPAddress      PublicIP    = createPublicIP(body.publicIP, body.region, body.resourceGroup);
+                //Microsoft.Azure.Management.Network.Fluent.INetworkSecurityGroup NSG         = createNSG(body.nsgName, body.region, body.resourceGroup);
+                //Microsoft.Azure.Management.Network.Fluent.INetworkInterface     nic         = createNic(body.nicName, body.region, body.resourceGroup, body.subnetName, network, PublicIP, NSG);
+                var nic = networkInterfaceFind(body.nicName);
+                
                 var createdVirtualMachine = Credential.azure.VirtualMachines
                     .Define(body.vmName)
                     .WithRegion(body.region)
                     .WithExistingResourceGroup(body.resourceGroup)
                     .WithExistingPrimaryNetworkInterface(nic)
-                    .WithLatestWindowsImage("MicrosoftWindowsServer", "WindowsServer", "2012-R2-Datacenter")
+                    .WithLatestWindowsImage(body.imagepublisher,body.imageoffer, body.imagesku)
                     //.WithLatestLinuxImage().WithRootUsername().WithRootPassword()
-                    .WithAdminUsername("adminnO1!hda")
-                    .WithAdminPassword("notAllow!Pass")
+                    .WithAdminUsername(body.adminUsername)
+                    .WithAdminPassword(body.adminpass)
                     .WithComputerName(body.computerName)
-                    .WithSize(VirtualMachineSizeTypes.StandardB1s).Create();
-                return "true";
+                    .WithSize(body.size).Create();
+                return "Created";
             }
             catch (Exception exception)
             {
@@ -226,23 +343,5 @@ namespace APIandSwagger.Azure
             }
             return true;
         }
-        /*
-        public static bool createInstance(Azure.IDBody vmid)
-        {
-            checkAzureCredential();
-            var virtualMachines = Credential.azure.VirtualMachines.List();
-            List<Microsoft.Azure.Management.Compute.Fluent.IVirtualMachine> virtualMachinesList = virtualMachines.ToList();
-            List<Azure.VMSimpleBody> vmList = new List<Azure.VMSimpleBody>();
-            for (int i = 0; i < virtualMachinesList.Count; i++)
-            {
-                if (virtualMachinesList[i].VMId == vmid.vmid)
-                {
-                    Credential.azure.VirtualMachines.DeleteById(virtualMachinesList[i].Id);
-                    return true;
-                }
-            }
-            return true;
-        }
-        */
     }
 }
