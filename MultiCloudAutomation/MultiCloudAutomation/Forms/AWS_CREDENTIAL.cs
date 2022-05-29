@@ -116,7 +116,7 @@ namespace MultiCloudAutomation.Forms
         {
             AWS.getAllInstanceBody body = new AWS.getAllInstanceBody(region);
             string jsonbody = JsonConvert.SerializeObject(body);
-            ResponseClass task = await Request.PostRequestAsync("aws/instance/getAllInstance", jsonbody);
+            ResponseClass task = await Request.PostRequestAsync("aws/getAllInstance", jsonbody);
             return task;
         }
     }

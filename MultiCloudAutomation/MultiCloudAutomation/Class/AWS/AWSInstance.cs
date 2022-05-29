@@ -30,7 +30,7 @@ namespace MultiCloudAutomation.AWSInstance
         {
             AWS.getAllInstanceBody body = new AWS.getAllInstanceBody(region);
             string jsonbody = JsonConvert.SerializeObject(body);
-            task = await Request.PostRequestAsync("aws/instance/getAllInstance", jsonbody);
+            task = await Request.PostRequestAsync("aws/getAllInstance", jsonbody);
             return task;
         }
 
@@ -86,7 +86,7 @@ namespace MultiCloudAutomation.AWSInstance
             templist.Add(dataGridView1.Rows[selectedColumnIndex].Cells[1].Value.ToString());
             AWS.InstanceIDListBody loginbody = new AWS.InstanceIDListBody(templist, region);
             string jsonbody = JsonConvert.SerializeObject(loginbody);
-            task = await Request.PostRequestAsync("aws/instance/startInstance", jsonbody);
+            task = await Request.PostRequestAsync("aws/startInstance", jsonbody);
             System.Threading.Thread.Sleep(1000);
             await WaitFiveSecond();
             return task;
@@ -98,7 +98,7 @@ namespace MultiCloudAutomation.AWSInstance
             templist.Add(dataGridView1.Rows[selectedColumnIndex].Cells[1].Value.ToString());
             AWS.InstanceIDListBody loginbody = new AWS.InstanceIDListBody(templist, region);
             string jsonbody = JsonConvert.SerializeObject(loginbody);
-            task = await Request.PostRequestAsync("aws/instance/stopInstance", jsonbody);
+            task = await Request.PostRequestAsync("aws/stopInstance", jsonbody);
             await WaitFiveSecond();
             return task;
         }
@@ -109,7 +109,7 @@ namespace MultiCloudAutomation.AWSInstance
             templist.Add(dataGridView1.Rows[selectedColumnIndex].Cells[1].Value.ToString());
             AWS.InstanceIDListBody loginbody = new AWS.InstanceIDListBody(templist, region);
             string jsonbody = JsonConvert.SerializeObject(loginbody);
-            task = await Request.PostRequestAsync("aws/instance/rebootInstance", jsonbody);
+            task = await Request.PostRequestAsync("aws/rebootInstance", jsonbody);
             await WaitFiveSecond();
             return task;
         }
@@ -120,7 +120,7 @@ namespace MultiCloudAutomation.AWSInstance
             templist.Add(dataGridView1.Rows[selectedColumnIndex].Cells[1].Value.ToString());
             AWS.InstanceIDListBody loginbody = new AWS.InstanceIDListBody(templist, region);
             string jsonbody = JsonConvert.SerializeObject(loginbody);
-            task = await Request.PostRequestAsync("aws/instance/terminateInstance", jsonbody);
+            task = await Request.PostRequestAsync("aws/terminateInstance", jsonbody);
             await WaitFiveSecond();
             return task;
         }

@@ -21,7 +21,12 @@ namespace APIandSwagger.Controllers.AWS
             return true;
         }
 
-        [HttpPost]
+        /// <summary>
+        /// TEST
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        [HttpPost][Produces("application/json")]
         public IActionResult setCredential([FromBody] Azure.CredentialBody value)
         {
             Credential.clientId = value.clientId;
@@ -31,8 +36,11 @@ namespace APIandSwagger.Controllers.AWS
             
             return Ok(Credential.setCred());
         }
-
-        [HttpGet]
+        /// <summary>
+        /// Resource Group Get
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet][Produces("application/json")]
         public IActionResult ResourceGroupsGet()
         {
             if (!checkAzureCredential())

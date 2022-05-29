@@ -8,7 +8,7 @@ namespace APIandSwagger
 {
     public class getAllInstanceBody
     {
-        [Required(ErrorMessage = "Region required")]
+        [Required]
         public string region { get; set; }
     }
 }

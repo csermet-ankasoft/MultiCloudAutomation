@@ -10,35 +10,87 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace APIandSwagger.Controllers.AWS
 {
+    [ApiExplorerSettings(GroupName = "AWS")]
     [Route("aws/[action]")]
     [ApiController]
     public class AWSController : ControllerBase
     {
-       
+
+        /// <summary>
+        /// Login İşlemini Gerçekleştirir
+        /// </summary>
+        /// <param  name="body"></param>
+        /// <remarks>
+        /// Sample request:
+        /// 
+        ///     
+        ///     { 
+        ///         "accessKey":"************"
+        ///         "secretKey":"************"
+        ///     }
+        /// </remarks>
         [HttpPost]
-        public string setCredential([FromBody] AWSKeyBody value)
-        {
-            AWSKey.accessKey = value.accessKey;
-            AWSKey.secretKey = value.secretKey;
-            return "OK";
+        [Produces("application/json")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(400)]
+        public IActionResult setCredential([FromBody] AWSKeyBody body)
+        {            
+            try
+            {
+                AWSKey.accessKey = body.accessKey;
+                AWSKey.secretKey = body.secretKey;
+                return Ok("OK");
+            }
+            catch (Exception exception)
+            {
+                return BadRequest(exception.Message);
+            }
         }
 
+        /// <summary>
+        /// Tüm Region'ları Getirir
+        /// </summary>
         [HttpGet]
-        public IEnumerable<RegionEndpoint> getAllRegion()
+        [Produces("application/json")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(400)]
+        public IActionResult getAllRegion()
         {
-            return RegionEndpoint.EnumerableAllRegions;
-        }
-        [HttpGet]
-        public List<string> getAllInstanceTypes()
-        {
-            Type typeOfInstancetype = typeof(InstanceType);
-            FieldInfo[] fieldOfInstancetype = typeOfInstancetype.GetFields();
-            List<string> listOfFieldInstancetype = new List<string>();
-            for (int i = 0; i < fieldOfInstancetype.Length; i++)
+            try
             {
-                listOfFieldInstancetype.Add(fieldOfInstancetype[i].Name);
+                return Ok(RegionEndpoint.EnumerableAllRegions);
             }
-            return listOfFieldInstancetype;
+            catch (Exception exception)
+            {
+                return BadRequest(exception.Message);
+            }
+
+        }
+
+        /// <summary>
+        /// Tüm Sanal Makine Tiplerini Getirir
+        /// </summary>
+        [HttpGet][Produces("application/json")]
+        public IActionResult getAllInstanceTypes()
+        {
+            try
+            {
+                Type typeOfInstancetype = typeof(InstanceType);
+                FieldInfo[] fieldOfInstancetype = typeOfInstancetype.GetFields();
+                List<string> listOfFieldInstancetype = new List<string>();
+                for (int i = 0; i < fieldOfInstancetype.Length; i++)
+                {
+                    listOfFieldInstancetype.Add(fieldOfInstancetype[i].Name);
+                }
+                return Ok(listOfFieldInstancetype);
+            }
+            catch (Exception exception)
+            {
+                return BadRequest(exception.Message);
+            }
+            
         }
     }
 }

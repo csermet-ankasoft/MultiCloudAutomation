@@ -10,12 +10,17 @@ namespace APIandSwagger
     {
         [Required(ErrorMessage = "Instance Type required",AllowEmptyStrings =false)]
         public string instanceType { get; set; }
+
         [Required(ErrorMessage = "Region required", AllowEmptyStrings = false)]
         public string region { get; set; }
+
         [Required(ErrorMessage = "Image ID required", AllowEmptyStrings = false)]
         public string imageID { get; set; }
-        public Dictionary<string,string> tagDictionary;
-        public int minCount = 1;
-        public int maxCount = 1;
+
+        public Dictionary<string,string> tagDictionary { get; set; }
+
+        public int minCount { get; set; } = 1;
+        
+        public int maxCount { get; set; } = 1;
     }
 }

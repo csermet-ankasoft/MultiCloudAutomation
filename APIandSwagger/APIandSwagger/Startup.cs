@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -30,10 +32,15 @@ namespace APIandSwagger
             {
                 options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
                 {
-                    Title = "Swagger Demo",
-                    Description = "Demo API",
-                    Version = "v1"
+                    Title = "Swagger CNR",
+                    Description = "Nope",
+                    Version = "BETA"
                 });
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                options.IncludeXmlComments(xmlPath);
+                options.TagActionsBy(api => new[] { api.GroupName });
+                options.DocInclusionPredicate((name, api) => true);
             });
         }
 
@@ -53,7 +60,8 @@ namespace APIandSwagger
             app.UseMvc();
             app.UseSwagger();
             app.UseSwaggerUI(options => {
-                options.SwaggerEndpoint("/swagger/v1/swagger.json", "SwaggerTest2");
+                options.SwaggerEndpoint("/swagger/v1/swagger.json", "Cloud Automation Swagger");
+                options.RoutePrefix = string.Empty;
             });
         }
     }

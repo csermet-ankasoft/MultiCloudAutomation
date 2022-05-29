@@ -18,7 +18,7 @@ namespace APIandSwagger.Controllers.AWS
     public class AzureInstanceController : ControllerBase
     {
 
-        [HttpGet]
+        [HttpGet][Produces("application/json")]
         public IActionResult getVMSimple()
         {
             try
@@ -35,7 +35,7 @@ namespace APIandSwagger.Controllers.AWS
             }            
         }
 
-        [HttpPost]
+        [HttpPost][Produces("application/json")]
         public IActionResult networknames([FromBody] Azure.NameByResourceGroupBody body)
         {
             try
@@ -53,7 +53,7 @@ namespace APIandSwagger.Controllers.AWS
             }
         }
 
-        [HttpPost]
+        [HttpPost][Produces("application/json")]
         public IActionResult publicIPAddressnames([FromBody] Azure.NameByResourceGroupBody body)
         {
             try
@@ -71,7 +71,7 @@ namespace APIandSwagger.Controllers.AWS
             }
         }
 
-        [HttpPost]
+        [HttpPost][Produces("application/json")]
         public IActionResult networkSecurityGroupnames([FromBody] Azure.NameByResourceGroupBody body)
         {
             try
@@ -89,7 +89,7 @@ namespace APIandSwagger.Controllers.AWS
             }
         }
 
-        [HttpPost]
+        [HttpPost][Produces("application/json")]
         public IActionResult networkInterfacenames([FromBody] Azure.NameByResourceGroupBody body)
         {
             try
@@ -109,7 +109,7 @@ namespace APIandSwagger.Controllers.AWS
 
 
 
-        [HttpPost]
+        [HttpPost][Produces("application/json")]
         public IActionResult createInstance([FromBody] Azure.CreateInstanceBody body)
         {
             try
@@ -127,7 +127,7 @@ namespace APIandSwagger.Controllers.AWS
             }
         }
 
-        [HttpPost]
+        [HttpPost][Produces("application/json")]
         public IActionResult startInstance([FromBody] Azure.IDBody body)
         {
             try
@@ -145,7 +145,7 @@ namespace APIandSwagger.Controllers.AWS
             }
         }
 
-        [HttpPost]
+        [HttpPost][Produces("application/json")]
         public IActionResult restartInstance([FromBody] Azure.IDBody body)
         {
             try
@@ -163,7 +163,7 @@ namespace APIandSwagger.Controllers.AWS
             }
         }
 
-        [HttpPost]
+        [HttpPost][Produces("application/json")]
         public IActionResult stopInstance([FromBody] Azure.IDBody body)
         {
             try
@@ -181,7 +181,7 @@ namespace APIandSwagger.Controllers.AWS
             }
         }
 
-        [HttpPost]
+        [HttpPost][Produces("application/json")]
         public IActionResult terminateInstance([FromBody] Azure.IDBody body)
         {
             try
