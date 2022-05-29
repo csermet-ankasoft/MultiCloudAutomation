@@ -54,7 +54,6 @@ namespace APIandSwagger.Controllers.AWS
         [HttpGet]
         [Produces("application/json")]
         [ProducesResponseType(200)]
-        [ProducesResponseType(401)]
         [ProducesResponseType(400)]
         public IActionResult getAllRegion()
         {
@@ -72,7 +71,10 @@ namespace APIandSwagger.Controllers.AWS
         /// <summary>
         /// Tüm Sanal Makine Tiplerini Getirir
         /// </summary>
-        [HttpGet][Produces("application/json")]
+        [HttpGet]
+        [Produces("application/json")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
         public IActionResult getAllInstanceTypes()
         {
             try
