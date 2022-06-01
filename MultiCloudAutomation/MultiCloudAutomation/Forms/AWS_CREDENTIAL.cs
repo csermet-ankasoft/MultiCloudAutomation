@@ -52,7 +52,8 @@ namespace MultiCloudAutomation.Forms
                 }
                 textBoxAccessKEY.ReadOnly = true;
                 textBoxSecretKEY.ReadOnly = true;
-                labelTest.Text = "HTTP Kodu : Waiting...";
+                labelTest.Text = "Bağlantı Test ediliyor...";
+                labelTest.ForeColor = Color.Black;
                 loginAndText();
                 button2.Text = "Düzenle";
             }
@@ -68,7 +69,21 @@ namespace MultiCloudAutomation.Forms
         {
             ResponseClass logintext = await login();
             ResponseClass getallinstances = await getAllInstanceTEST("us-east-1");
-            labelTest.Text = "HTTP Kodu : " + getallinstances.StatusCode.ToString();
+            if (getallinstances.StatusCode.ToString() == "OK")
+            {
+                labelTest.Text = "Bağlantı Sağlandı";
+                labelTest.ForeColor = Color.DarkGreen;
+            }
+            else if(getallinstances.StatusCode.ToString() == "BadRequest")
+            {
+                labelTest.Text = "Bağlantı Sağlanamadı";
+                labelTest.ForeColor = Color.DarkRed;
+            }
+            else
+            {
+                labelTest.Text = "HTTP Kodu : " + getallinstances.StatusCode.ToString();
+            }
+            
         }
 
         public void credentialRead()

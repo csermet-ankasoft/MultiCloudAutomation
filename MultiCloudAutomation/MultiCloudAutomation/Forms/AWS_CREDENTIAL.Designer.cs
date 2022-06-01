@@ -96,9 +96,9 @@
             this.labelTest.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelTest.Location = new System.Drawing.Point(18, 197);
             this.labelTest.Name = "labelTest";
-            this.labelTest.Size = new System.Drawing.Size(214, 25);
+            this.labelTest.Size = new System.Drawing.Size(207, 25);
             this.labelTest.TabIndex = 2;
-            this.labelTest.Text = "HTTP Kodu : Waiting...";
+            this.labelTest.Text = "Bağlantı Test ediliyor...";
             // 
             // AWS_CREDENTIAL
             // 

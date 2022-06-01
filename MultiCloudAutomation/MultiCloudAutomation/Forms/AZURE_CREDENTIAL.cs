@@ -59,7 +59,8 @@ namespace MultiCloudAutomation.Forms
                 textBoxClientSecret.ReadOnly = true;
                 textBoxTenantID.ReadOnly = true;
                 textBoxSubscriptionID.ReadOnly = true;
-                labelTest.Text = "HTTP Kodu : Waiting...";
+                labelTest.Text = "Bağlantı Test ediliyor...";
+                labelTest.ForeColor = Color.Black;
                 loginAndText();
                 button2.Text = "Düzenle";
             }
@@ -76,7 +77,20 @@ namespace MultiCloudAutomation.Forms
         {
             ResponseClass logintext = await loginAzure();
             var VMNameGettest = await VMNameGetTest();
-            labelTest.Text = "HTTP Kodu : " + VMNameGettest.StatusCode.ToString();
+            if (VMNameGettest.StatusCode.ToString() == "OK")
+            {
+                labelTest.Text = "Bağlantı Sağlandı";
+                labelTest.ForeColor = Color.DarkGreen;
+            }
+            else if (VMNameGettest.StatusCode.ToString() == "BadRequest")
+            {
+                labelTest.Text = "Bağlantı Sağlanamadı";
+                labelTest.ForeColor = Color.DarkRed;
+            }
+            else
+            {
+                labelTest.Text = "HTTP Kodu : " + VMNameGettest.StatusCode.ToString();
+            }
         }
 
 
