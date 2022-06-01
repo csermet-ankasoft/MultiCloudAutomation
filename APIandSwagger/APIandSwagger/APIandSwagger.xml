@@ -131,16 +131,169 @@
         </member>
         <member name="M:APIandSwagger.Controllers.AWS.AzureController.setCredential(APIandSwagger.Azure.CredentialBody)">
             <summary>
-            TEST
+            Azure Giriş Bilgileri
             </summary>
-            <param name="value"></param>
-            <returns></returns>
+            <param name="body"></param>
+            <remarks>
+            Sample request:
+            
+                { 
+                    {
+                        "clientId": "....",
+                        "clientSecret": "....",
+                        "tenantId": "....",
+                        "subscriptionId": "...."
+                    }
+                }
+            </remarks>
         </member>
         <member name="M:APIandSwagger.Controllers.AWS.AzureController.ResourceGroupsGet">
             <summary>
-            Resource Group Get
+            Tüm Resource'ları getirir
             </summary>
-            <returns></returns>
+        </member>
+        <member name="M:APIandSwagger.Controllers.AWS.AzureInstanceController.getVMSimple">
+            <summary>
+            Sanal Makinelerin Basit Bilgilerini Getirir
+            </summary>
+        </member>
+        <member name="M:APIandSwagger.Controllers.AWS.AzureInstanceController.networknames(APIandSwagger.Azure.NameByResourceGroupBody)">
+            <summary>
+            Sanal Makinelerin Network İsimlerini Getirir
+            </summary>
+            <param name="body"></param>
+            <remarks>
+            Sample request:
+            
+                { 
+                    "resourceGroup": "Test"
+                }
+            </remarks>
+        </member>
+        <member name="M:APIandSwagger.Controllers.AWS.AzureInstanceController.publicIPAddressnames(APIandSwagger.Azure.NameByResourceGroupBody)">
+            <summary>
+            Sanal Makinelerin Public IP İsimlerini Getirir
+            </summary>
+            <param name="body"></param>
+            <remarks>
+            Sample request:
+            
+                { 
+                    "resourceGroup": "Test"
+                }
+            </remarks>
+        </member>
+        <member name="M:APIandSwagger.Controllers.AWS.AzureInstanceController.networkSecurityGroupnames(APIandSwagger.Azure.NameByResourceGroupBody)">
+            <summary>
+            Sanal Makinelerin Network Security Group İsimlerini Getirir
+            </summary>
+            <param name="body"></param>
+            <remarks>
+            Sample request:
+            
+                { 
+                    "resourceGroup": "Test"
+                }
+            </remarks>
+        </member>
+        <member name="M:APIandSwagger.Controllers.AWS.AzureInstanceController.networkInterfacenames(APIandSwagger.Azure.NameByResourceGroupBody)">
+            <summary>
+            Sanal Makinelerin Network Interface İsimlerini Getirir
+            </summary>
+            <param name="body"></param>
+            <remarks>
+            Sample request:
+            
+                { 
+                    "resourceGroup": "Test"
+                }
+            </remarks>
+        </member>
+        <member name="M:APIandSwagger.Controllers.AWS.AzureInstanceController.createInstance(APIandSwagger.Azure.CreateInstanceBody)">
+            <summary>
+            Sanal Makine oluşturma
+            </summary>
+            <param name="body"></param>
+            <remarks>
+            Sample request:
+            
+                { 
+                    {
+                        "size": "StandardB1s",
+                        "osType": "Windows",
+                        "region": "australiaeast",
+                        "vmName": "TT2",
+                        "imagesku": "2012-R2-Datacenter",
+                        "imageoffer": "WindowsServer",
+                        "imagepublisher":"MicrosoftWindowsServer",
+                        "resourceGroup": "Test",
+                        "computerName": "CTT",
+                        "nicName": "Nic3",
+                        "adminpass": "Test242141",
+                        "adminUsername": "TestAdmin123"
+                    }
+                }
+            </remarks>
+        </member>
+        <member name="M:APIandSwagger.Controllers.AWS.AzureInstanceController.startInstance(APIandSwagger.Azure.IDBody)">
+            <summary>
+            Sanal Makine Başlatma
+            </summary>
+            <param name="body"></param>
+            <remarks>
+            Sample request:
+            
+                { 
+                    {
+                        "vmid": "c90d7034-0c8f-45bb-b068-77f6011bfb57"
+                    }
+                }
+            </remarks>
+        </member>
+        <member name="M:APIandSwagger.Controllers.AWS.AzureInstanceController.restartInstance(APIandSwagger.Azure.IDBody)">
+            <summary>
+            Sanal Makine Yeniden Başlatma
+            </summary>
+            <param name="body"></param>
+            <remarks>
+            Sample request:
+            
+                { 
+                    {
+                        "vmid": "c90d7034-0c8f-45bb-b068-77f6011bfb57"
+                    }
+                }
+            </remarks>
+        </member>
+        <member name="M:APIandSwagger.Controllers.AWS.AzureInstanceController.stopInstance(APIandSwagger.Azure.IDBody)">
+            <summary>
+            Sanal Makine Durdurma
+            </summary>
+            <param name="body"></param>
+            <remarks>
+            Sample request:
+            
+                { 
+                    {
+                        "vmid": "c90d7034-0c8f-45bb-b068-77f6011bfb57"
+                    }
+                }
+            </remarks>
+        </member>
+        <member name="M:APIandSwagger.Controllers.AWS.AzureInstanceController.terminateInstance(APIandSwagger.Azure.IDBody)">
+            <summary>
+            Sanal Makine Silme
+            </summary>
+            <param name="body"></param>
+            <remarks>
+            Sample request:
+            
+                { 
+                    {
+                        "vmid": "c90d7034-0c8f-45bb-b068-77f6011bfb57"
+                    }
+                }
+            </remarks>
         </member>
     </members>
 </doc>

@@ -26,16 +26,6 @@ namespace APIandSwagger.Azure
         public string imageoffer { get; set; }
         [Required(ErrorMessage = "imagesku required", AllowEmptyStrings = false)]
         public string imagesku { get; set; }
-        /*
-        [Required(ErrorMessage = "networkName required", AllowEmptyStrings = false)]        
-        public string networkName { get; set; }
-        [Required(ErrorMessage = "subnetName required", AllowEmptyStrings = false)]
-        public string subnetName { get; set; }
-        [Required(ErrorMessage = "publicIP required", AllowEmptyStrings = false)]
-        public string publicIP { get; set; }
-        [Required(ErrorMessage = "nsgName required", AllowEmptyStrings = false)]
-        public string nsgName { get; set; }
-        */
         [Required(ErrorMessage = "nicName required", AllowEmptyStrings = false)]
         public string nicName { get; set; }
         [Required(ErrorMessage = "adminUsername required", AllowEmptyStrings = false)]

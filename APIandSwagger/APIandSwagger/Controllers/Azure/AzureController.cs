@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace APIandSwagger.Controllers.AWS
 {
+    [ApiExplorerSettings(GroupName = "AZURE")]
     [Route("azure/[action]")]
     [ApiController]
     public class AzureController : ControllerBase
@@ -22,25 +23,44 @@ namespace APIandSwagger.Controllers.AWS
         }
 
         /// <summary>
-        /// TEST
+        /// Azure Giriş Bilgileri
         /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        [HttpPost][Produces("application/json")]
-        public IActionResult setCredential([FromBody] Azure.CredentialBody value)
+        /// <param name="body"></param>
+        /// <remarks>
+        /// Sample request:
+        /// 
+        ///     { 
+        ///         {
+        ///             "clientId": "....",
+        ///             "clientSecret": "....",
+        ///             "tenantId": "....",
+        ///             "subscriptionId": "...."
+        ///         }
+        ///     }
+        /// </remarks>
+        [Produces("application/json")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(400)]
+        [HttpPost]
+        public IActionResult setCredential([FromBody] Azure.CredentialBody body)
         {
-            Credential.clientId = value.clientId;
-            Credential.clientSecret = value.clientSecret;
-            Credential.tenantId = value.tenantId;
-            Credential.subscriptionId = value.subscriptionId;            
+            Credential.clientId = body.clientId;
+            Credential.clientSecret = body.clientSecret;
+            Credential.tenantId = body.tenantId;
+            Credential.subscriptionId = body.subscriptionId;            
             
             return Ok(Credential.setCred());
         }
+
         /// <summary>
-        /// Resource Group Get
+        /// Tüm Resource'ları getirir
         /// </summary>
-        /// <returns></returns>
-        [HttpGet][Produces("application/json")]
+        [Produces("application/json")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(400)]
+        [HttpGet]
         public IActionResult ResourceGroupsGet()
         {
             if (!checkAzureCredential())
