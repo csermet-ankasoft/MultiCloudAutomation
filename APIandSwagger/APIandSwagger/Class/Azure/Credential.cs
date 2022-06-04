@@ -27,7 +27,7 @@ namespace APIandSwagger
                     .WithLogLevel(HttpLoggingDelegatingHandler.Level.Basic)
                     .Authenticate(credentials)
                     .WithSubscription(subscriptionId);
-                return "OK";
+                return "Completed";
             }
             catch (Exception exception)
             {

@@ -13,13 +13,13 @@ namespace APIandSwagger.Controllers.AWS
     public class AzureController : ControllerBase
     {
 
-        public static bool checkAzureCredential()
+        public static string checkAzureCredential()
         {
             if (Credential.clientId == "" || Credential.azure == null)
             {
-                return false;
+                return "Failed";
             }
-            return true;
+            return "Completed";
         }
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace APIandSwagger.Controllers.AWS
         [HttpGet]
         public IActionResult ResourceGroupsGet()
         {
-            if (!checkAzureCredential())
+            if (checkAzureCredential() == "Failed")
                 return Unauthorized();
             var resourceGroups = Credential.azure.ResourceGroups.List().ToList();
             return Ok(resourceGroups);

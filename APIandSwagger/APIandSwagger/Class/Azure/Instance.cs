@@ -293,7 +293,7 @@ namespace APIandSwagger.Azure
 
 
 
-        public static bool StartInstance(Azure.IDBody vmid)
+        public static string StartInstance(Azure.IDBody vmid)
         {
             checkAzureCredential();
             var virtualMachines = Credential.azure.VirtualMachines.List();
@@ -304,12 +304,12 @@ namespace APIandSwagger.Azure
                 if (virtualMachinesList[i].VMId == vmid.vmid)
                 {
                     virtualMachinesList[i].Start();
-                    return true;
+                    return "Completed";
                 }
             }
-            return false;
+            return "Failed";
         }
-        public static bool RestartInstance(Azure.IDBody vmid)
+        public static string RestartInstance(Azure.IDBody vmid)
         {
             checkAzureCredential();
             var virtualMachines = Credential.azure.VirtualMachines.List();
@@ -320,13 +320,13 @@ namespace APIandSwagger.Azure
                 if (virtualMachinesList[i].VMId == vmid.vmid)
                 {
                     virtualMachinesList[i].Restart();
-                    return true;
+                    return "Completed";
                 }
             }
-            return false;
+            return "Failed";
         }
         
-        public static bool StopInstance(Azure.IDBody vmid)
+        public static string StopInstance(Azure.IDBody vmid)
         {
             checkAzureCredential();
             var virtualMachines = Credential.azure.VirtualMachines.List();
@@ -337,13 +337,13 @@ namespace APIandSwagger.Azure
                 if (virtualMachinesList[i].VMId == vmid.vmid)
                 {
                     virtualMachinesList[i].PowerOff();
-                    return true;
+                    return "Completed";
                 }
             }
-            return false;
+            return "Failed";
         }
 
-        public static bool TerminateInstance(Azure.IDBody vmid)
+        public static string TerminateInstance(Azure.IDBody vmid)
         {
             checkAzureCredential();
             var virtualMachines = Credential.azure.VirtualMachines.List();
@@ -354,10 +354,10 @@ namespace APIandSwagger.Azure
                 if (virtualMachinesList[i].VMId == vmid.vmid)
                 {
                     Credential.azure.VirtualMachines.DeleteById(virtualMachinesList[i].Id);
-                    return true;
+                    return "Completed";
                 }
             }
-            return true;
+            return "Failed";
         }
     }
 }
